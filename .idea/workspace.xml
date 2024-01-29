@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18fd89d1-ca66-4702-be4c-572acb05cf51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/Dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/login.fxml" afterDir="false" />
@@ -85,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706551679347</updated>
       <workItem from="1706551680440" duration="2000" />
-      <workItem from="1706552620724" duration="1846000" />
+      <workItem from="1706552620724" duration="2148000" />
     </task>
     <servers />
   </component>

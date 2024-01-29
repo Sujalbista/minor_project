@@ -2,13 +2,11 @@ package com.smartcollege.smartcollege;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import com.smartcollege.smartcollege.HelloApplication;
 
@@ -25,6 +23,19 @@ public class HelloController {
 
     @FXML
     private Label feedback;
+
+    @FXML
+    private Button settingsbtn;
+
+    @FXML
+    private TabPane settingsTab;
+
+    @FXML
+    void onSettings(ActionEvent event) {
+        settingsTab.setVisible(true);
+
+    }
+
     @FXML
     void onLogin(ActionEvent event) throws InterruptedException {
         BackgroundFill greenFill = new BackgroundFill(Color.GREEN, null, null);
@@ -38,6 +49,8 @@ public class HelloController {
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
             com.smartcollege.smartcollege.Dashboard dashboard = new com.smartcollege.smartcollege.Dashboard(mainwindow);
+
+
 
         }else{
             feedback.setText("Failed! Try again!");

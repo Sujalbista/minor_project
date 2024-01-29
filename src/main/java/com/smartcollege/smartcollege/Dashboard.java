@@ -10,7 +10,7 @@ import java.io.IOException;
 public class Dashboard{
 
     Dashboard(Stage stage) {
-        if(com.smartcollege.smartcollege.HelloApplication.loggedin){
+        if(HelloApplication.loggedin){
             try{
                 openDashboard(stage);
 
@@ -20,11 +20,15 @@ public class Dashboard{
         }
     }
     private void openDashboard(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(com.smartcollege.smartcollege.HelloApplication.class.getResource("dashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+//        scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
         stage.setTitle("Admin Dashboard");
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();
+
+        //stage.get
+
     }
 }
