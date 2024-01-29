@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -86,9 +88,27 @@
                   <Tab text="User" />
                </tabs>
             </TabPane>
-            <TabPane fx:id="studentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="studentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
-                  <Tab text="View Students" />
+                  <Tab text="View Students">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="studentTable" layoutX="9.0" layoutY="45.0" prefHeight="524.0" prefWidth="999.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                                 <columns>
+                                    <TableColumn fx:id="stdID" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="stdName" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="stdAddress" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="stdContact" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="stdEmail" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="stdFaculty" minWidth="0.0" prefWidth="169.0" text="Faculty" />
+                                    <TableColumn fx:id="stdBatch" minWidth="0.0" prefWidth="54.0" text="Batch" />
+                                    <TableColumn fx:id="stdParentId" prefWidth="73.0" text="ParentID" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content></Tab>
                   <Tab text="Addstudents">
                      <content>
                         <Pane prefHeight="200.0" prefWidth="200.0">
@@ -157,7 +177,7 @@
                      </content></Tab>
                </tabs>
             </TabPane>
-            <TabPane fx:id="homeTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="homeTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="Dashboard">
                      <content>

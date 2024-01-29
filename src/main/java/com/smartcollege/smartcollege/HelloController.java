@@ -1,5 +1,7 @@
 package com.smartcollege.smartcollege;
 
+import com.smartcollege.smartcollege.EntityClass.Student;
+import com.smartcollege.smartcollege.tableview.StudentView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -174,6 +176,33 @@ public class HelloController {
 
     @FXML
     private TextField sid;
+
+    @FXML
+    private TableColumn<Student, String> stdAddress;
+
+    @FXML
+    private TableColumn<Student, String> stdBatch;
+
+    @FXML
+    private TableColumn<Student, Integer> stdContact;
+
+    @FXML
+    private TableColumn<Student, String> stdEmail;
+
+    @FXML
+    private TableColumn<Student, String> stdFaculty;
+
+    @FXML
+    private TableColumn<Student, Integer> stdID;
+
+    @FXML
+    private TableColumn<Student, String> stdName;
+
+    @FXML
+    private TableColumn<Student, Integer> stdParentId;
+
+    @FXML
+    private TableView<Student> studentTable;
     @FXML
     void onStudents(ActionEvent event) {
         settingsTab.setVisible(false);
@@ -184,6 +213,8 @@ public class HelloController {
         //
         //TRUE
         studentsTab.setVisible(true);
+
+        StudentView studentView= new StudentView(studentTable,stdID,stdName,stdAddress,stdContact,stdEmail,stdFaculty,stdBatch,stdParentId);
 
     }
     @FXML
@@ -234,7 +265,7 @@ public class HelloController {
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
-            com.smartcollege.smartcollege.Dashboard dashboard = new com.smartcollege.smartcollege.Dashboard(mainwindow);
+            Dashboard dashboard = new Dashboard(mainwindow);
 
         }else{
             feedback.setText("Failed! Try again!");

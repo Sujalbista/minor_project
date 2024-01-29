@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.*;
 import org.json.simple.*;
 public class Database{
-    static Connection con=null;
+    public static Connection con=null;
     static boolean connected = false;
     Database(){}
 
@@ -126,7 +126,7 @@ public class Database{
                 //create table
                 System.out.println("Creating Table!");
                 try{
-                    String sql = "CREATE TABLE faculty(fid int, name varchar(20), did int, CONSTRAINT pk_fid PRIMARY KEY (fid))";
+                    String sql = "CREATE TABLE faculty(fid int, faculty_name varchar(20), did int, CONSTRAINT pk_fid PRIMARY KEY (fid))";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     System.out.println("table created!");
@@ -164,7 +164,7 @@ public class Database{
                 //create table
                 System.out.println("Creating Table!");
                 try{
-                    String sql = "CREATE TABLE batch(id int, year varchar(20), fid int, semester varchar(10), CONSTRAINT pk_bid PRIMARY KEY (id))";
+                    String sql = "CREATE TABLE batch(bid int, year varchar(20), fid int, semester varchar(10), CONSTRAINT pk_bid PRIMARY KEY (bid))";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     System.out.println("table created!");
