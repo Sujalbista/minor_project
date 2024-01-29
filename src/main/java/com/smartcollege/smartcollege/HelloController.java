@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import com.smartcollege.smartcollege.HelloApplication;
+import com.smartcollege.smartcollege.database.Database;
 
 public class HelloController {
 
@@ -24,14 +25,49 @@ public class HelloController {
     @FXML
     private Label feedback;
 
-    //
-    //Settings TAB Menu
-    //
+
     @FXML
     private TabPane settingsTab;
 
     @FXML
     private Button settingsbtn;
+
+    //database variables
+    @FXML
+    private TextField database;
+
+    @FXML
+    private TextField dbpass;
+
+    @FXML
+    private TextField dbuser;
+
+    @FXML
+    private TextField host;
+
+    @FXML
+    private TextField port;
+
+    //database submission
+    @FXML
+    void onSubmitDB(ActionEvent event) {
+        if(!dbpass.getText().isEmpty() && !dbuser.getText().isEmpty() && !database.getText().isEmpty() && !host.getText().isEmpty() && !port.getText().isEmpty() ){
+            if(Database.postDatabaseDetails(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText())){
+                System.out.println("Saved!");
+            }else{
+                System.out.println(("Couldnt save!"));
+            }
+        }else{
+            System.out.println("Empty fields");
+        }
+    }
+
+    //
+    //Settings TAB Menu
+    //
+
+
+
     @FXML
     void onSettings(ActionEvent event) {
         studentsTab.setVisible(false);
@@ -85,7 +121,7 @@ public class HelloController {
         Background red = new Background(redFIll);
         loginbutton.setVisible(false);
         Stage mainwindow =(Stage) loginbutton.getScene().getWindow();
-        if(USERNAME.getText().equals("subu") && PASSWORD.getText().equals(("1234"))){
+        if(USERNAME.getText().equals("admin") && PASSWORD.getText().equals(("admin"))){
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;

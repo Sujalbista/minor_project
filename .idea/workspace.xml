@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18fd89d1-ca66-4702-be4c-572acb05cf51" name="Changes" comment="" />
+    <list default="true" id="18fd89d1-ca66-4702-be4c-572acb05cf51" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/database/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/phuldel/Programs/Minor Project/SmartCollege/src",
+    "last_opened_file_path": "/home/phuldel/Programs/Minor Project/SmartCollege/src/main/java/com/smartcollege/smartcollege",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -48,6 +55,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege" />
     </key>
@@ -78,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706551679347</updated>
       <workItem from="1706551680440" duration="2000" />
-      <workItem from="1706552620724" duration="2457000" />
+      <workItem from="1706552620724" duration="3488000" />
     </task>
     <servers />
   </component>
