@@ -17,8 +17,13 @@ import org.json.simple.parser.ParseException;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloController {
+
+    @FXML
+    private Label alertLabel;
+
 
     @FXML
     private PasswordField PASSWORD;
@@ -32,8 +37,12 @@ public class HelloController {
     @FXML
     private Label feedback;
 
+    @FXML
+    void onCloseAlert(ActionEvent event) {
+        alertLabel.getParent().setVisible(false);
+    }
     //
-    //Settings TAB Menu
+    /////////////////////////////////Settings TAB Menu //////////////////////////////////////////
     //
     @FXML
     private TabPane settingsTab;
@@ -68,6 +77,7 @@ public class HelloController {
         if(!dbpass.getText().isEmpty() && !dbuser.getText().isEmpty() && !database.getText().isEmpty() && !host.getText().isEmpty() && !port.getText().isEmpty() ){
             if(Database.postDatabaseDetails(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText())){
                 databaseAlert.setText("Successfully saved database!");
+                requestConnection();
             }else{
                 databaseAlert.setText("Error occurred when saving file!");
             }
@@ -81,35 +91,48 @@ public class HelloController {
     void onSettings(ActionEvent event) {
         studentsTab.setVisible(false);
         teachersTab.setVisible(false);
+        homeTab.setVisible(false);
         //
         //TRUE
         settingsTab.setVisible(true);
-        //show settings
-        settingsTab.setVisible(true);
         //check if there is database info stored in the config file.
+        checkAndConnect();
+
+    }
+    ///////////////////////////////////// DATABASE///////////////////////////////////////
+    private void checkAndConnect(){
         if(Database.checkDatabaseDetails()){
             JSONParser jsonParser = new JSONParser();
             try(FileReader reader = new FileReader("./src/main/resources/config/config.json")){
                 Object obj = jsonParser.parse(reader);
                 JSONObject json = (JSONObject) obj;
+
                 host.setText((String) json.get("host"));
                 port.setText((String) json.get("port").toString());
                 database.setText((String) json.get("database"));
                 dbuser.setText((String) json.get("username"));
                 dbpass.setText((String) json.get("password"));
                 databaseSubmitBtn.setText("Update");
+
                 databaseAlert.setText("Above information is being used for database connection!");
+                requestConnection();
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         }else{
-
+            databaseAlert.setText("Something went wrong!");
         }
-
     }
-
+    private void requestConnection(){
+        String checkConnection = Database.getConnection(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText());
+        if(Objects.equals(checkConnection, "connected")){
+            databaseAlert.setText("Connected to database.");
+        }else{
+            databaseAlert.setText(checkConnection);
+        }
+    }
     //
-    // Students TAB Menu
+    ///////////////////////////////////////// Students TAB Menu///////////////////////////////////
     //
     @FXML
     private TabPane studentsTab;
@@ -121,6 +144,7 @@ public class HelloController {
     void onStudents(ActionEvent event) {
         settingsTab.setVisible(false);
         teachersTab.setVisible(false);
+        homeTab.setVisible(false);
         //
         //TRUE
         studentsTab.setVisible(true);
@@ -128,7 +152,7 @@ public class HelloController {
     }
 
     //
-    //Teachers TAB Menu
+    //////////////////////////////////Teachers TAB Menu//////////////////////////////////////////////
     //
     @FXML
     private TabPane teachersTab;
@@ -137,7 +161,7 @@ public class HelloController {
     void onTeachers(ActionEvent event) {
         settingsTab.setVisible(false);
         studentsTab.setVisible(false);
-        //
+        homeTab.setVisible(false);
         // TRUE
         teachersTab.setVisible(true);
 
@@ -155,9 +179,7 @@ public class HelloController {
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
-            Dashboard dashboard = new Dashboard(mainwindow);
-
-
+            com.smartcollege.smartcollege.Dashboard dashboard = new com.smartcollege.smartcollege.Dashboard(mainwindow);
 
         }else{
             feedback.setText("Failed! Try again!");
@@ -168,4 +190,41 @@ public class HelloController {
         }
     }
 
+
+
+    //////=================== Home TAB =======================//
+    @FXML
+    private TabPane homeTab;
+
+    @FXML
+    void onHome(ActionEvent event) throws InterruptedException {
+        teachersTab.setVisible(false);
+        studentsTab.setVisible(false);
+        settingsTab.setVisible(false);
+        homeTab.setVisible(true);
+    }
+    @FXML
+    private TextField dptHOD;
+
+    @FXML
+    private TextField dptId;
+
+    @FXML
+    private TextField dptName;
+
+    @FXML
+    void onAddDepartment(ActionEvent event) {
+        //if department values are valid try and save it in the database
+        if(!dptId.getText().isEmpty() && !dptName.getText().isEmpty()){
+            String push = Database.addDepartment(dptId.getText(), dptName.getText(), dptHOD.getText());
+            if(Objects.equals(push, "Success")){
+                Alert.show(alertLabel,"Update Done!");
+                dptName.setText("");
+                dptId.setText("");
+                dptHOD.setText("");
+            }else{
+                Alert.show(alertLabel,push);
+            }
+        }
+    }
 }

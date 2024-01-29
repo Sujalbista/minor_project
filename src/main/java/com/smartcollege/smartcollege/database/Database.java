@@ -1,15 +1,13 @@
 package com.smartcollege.smartcollege.database;
-
-import org.json.simple.JSONObject;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import org.json.simple.*;
+
 public class Database{
     static Connection con=null;
+    static boolean connected = false;
     Database(){}
 
     public static boolean checkDatabaseDetails(){
@@ -42,39 +40,73 @@ public class Database{
         }
 
     }
-    public Connection getConnection(){
+    public static String getConnection(String host, String database,String user,String pass,String port){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url ="jdbc:mysql://localhost:3306/subu";
-            String user = "subu";
-            String pass="1234";
+//            Class.forName("com.mysql.jdbc.Driver");
+            String url ="jdbc:mysql://localhost:"+port+"/"+database;
             con = DriverManager.getConnection(url,user,pass);
-
-        }catch(SQLException |ClassNotFoundException e){
+            System.out.println("Successfully connected!!");
+            connected=true;
+            return "connected";
+        }catch(SQLException e){
+            e.printStackTrace();
+            return e.toString();
+        }
+    }
+    public static boolean checkTable(String table){
+        boolean check = false;
+        try{
+            String sql = "Select * from "+table;
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            if(result.next())
+                check = true;
+        }catch (SQLException e){
             e.printStackTrace();
         }
-        System.out.println("Successfully connected!!");
-        return con;
+        return check;
     }
 
-//    public static void main(String [] args){
-//        Database test = new Database();
-//        try{
-//            String sql = "Select * from employee";
-//
-//            PreparedStatement statement = test.con.prepareStatement(sql);
-//            ResultSet result = statement.executeQuery();
-//            while(result.next()){
-//                String name = result.getString("name");
-//                System.out.print(name);
-//            }
-//            test.con.close();
-//
-//        }catch(SQLException e){
-//            e.printStackTrace();
-//        }
-//
-//
-//    }
+    //////====================home===================//////////
+    public static String addDepartment(String id, String name, String hod){
+        String feedback = "";
+        //first check if the table exists or not
+        if(connected){
+            if(checkTable("department")){
+                //table found, lets insert data
+                try{
+                    String sql = "INSERT INTO department VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(hod)+")";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.executeUpdate();
+                    feedback= "Success";
+                }catch (SQLException e){
+                    feedback = e.toString();
+                }
+
+            }else{
+                //create table
+                System.out.println("Creating Table!");
+                try{
+                    System.out.println("yes");
+                    String sql = "CREATE TABLE department(did int, name varchar(20), hod int, CONSTRAINT pk_did PRIMARY KEY (did))";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.executeUpdate();
+                    System.out.println("table created!");
+                    //now insert data!
+                    String sql2 = "INSERT INTO department VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(hod)+")";
+                    PreparedStatement statement2 = con.prepareStatement(sql2);
+                    statement2.executeUpdate();
+                    System.out.println("Data Inserted!");
+                    feedback = "Success";
+                }catch (SQLException e){
+                    feedback = e.toString();
+                }
+
+            };
+        }else{
+            feedback = "Database Not Connected!";
+        }
+        return feedback;
+    }
 }
 
