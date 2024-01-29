@@ -10,6 +10,13 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import com.smartcollege.smartcollege.HelloApplication;
 import com.smartcollege.smartcollege.database.Database;
+import org.json.simple.*;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class HelloController {
 
@@ -25,7 +32,9 @@ public class HelloController {
     @FXML
     private Label feedback;
 
-
+    //
+    //Settings TAB Menu
+    //
     @FXML
     private TabPane settingsTab;
 
@@ -62,11 +71,6 @@ public class HelloController {
         }
     }
 
-    //
-    //Settings TAB Menu
-    //
-
-
 
     @FXML
     void onSettings(ActionEvent event) {
@@ -75,6 +79,26 @@ public class HelloController {
         //
         //TRUE
         settingsTab.setVisible(true);
+        //show settings
+        settingsTab.setVisible(true);
+        //check if there is database info stored in the config file.
+        if(Database.checkDatabaseDetails()){
+            JSONParser jsonParser = new JSONParser();
+            try(FileReader reader = new FileReader("./src/main/resources/config/config.json")){
+                Object obj = jsonParser.parse(reader);
+                JSONObject json = (JSONObject) obj;
+                host.setText((String) json.get("host"));
+                port.setText((String) json.get("port").toString());
+                database.setText((String) json.get("database"));
+                dbuser.setText((String) json.get("username"));
+                dbpass.setText((String) json.get("password"));
+
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        }else{
+
+        }
 
     }
 
@@ -121,11 +145,11 @@ public class HelloController {
         Background red = new Background(redFIll);
         loginbutton.setVisible(false);
         Stage mainwindow =(Stage) loginbutton.getScene().getWindow();
-        if(USERNAME.getText().equals("admin") && PASSWORD.getText().equals(("admin"))){
+        if(USERNAME.getText().equals("subu") && PASSWORD.getText().equals(("1234"))){
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
-            com.smartcollege.smartcollege.Dashboard dashboard = new com.smartcollege.smartcollege.Dashboard(mainwindow);
+            Dashboard dashboard = new Dashboard(mainwindow);
 
 
 
