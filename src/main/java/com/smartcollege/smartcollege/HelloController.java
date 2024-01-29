@@ -92,6 +92,8 @@ public class HelloController {
         studentsTab.setVisible(false);
         teachersTab.setVisible(false);
         homeTab.setVisible(false);
+        batchTab.setVisible(false);
+
         //
         //TRUE
         settingsTab.setVisible(true);
@@ -141,16 +143,67 @@ public class HelloController {
     private Button studentsbtn;
 
     @FXML
+    private TextField s_address;
+
+    @FXML
+    private TextField s_bid;
+
+    @FXML
+    private TextField s_contact;
+
+    @FXML
+    private TextField s_email;
+
+    @FXML
+    private TextField s_entrancescore;
+
+    @FXML
+    private TextField s_fid;
+
+    @FXML
+    private TextField s_firstname;
+
+    @FXML
+    private TextField s_lastname;
+
+    @FXML
+    private TextField s_middlename;
+
+    @FXML
+    private TextField s_pid;
+
+    @FXML
+    private TextField sid;
+    @FXML
     void onStudents(ActionEvent event) {
         settingsTab.setVisible(false);
         teachersTab.setVisible(false);
         homeTab.setVisible(false);
+        batchTab.setVisible(false);
+
         //
         //TRUE
         studentsTab.setVisible(true);
 
     }
-
+    @FXML
+    void onAddStudent(ActionEvent event) {
+        //if department values are valid try and save it in the database
+        if(!s_address.getText().isEmpty() && !s_pid.getText().isEmpty() && !s_bid.getText().isEmpty() && !sid.getText().isEmpty() && !s_contact.getText().isEmpty()
+                && !s_email.getText().isEmpty() && !s_entrancescore.getText().isEmpty() && !s_fid.getText().isEmpty() && !s_firstname.getText().isEmpty() && !s_lastname.getText().isEmpty()
+        ){
+            String push = Database.addStudent(s_firstname.getText(),s_middlename.getText(),s_lastname.getText(),s_address.getText(),s_contact.getText()
+                    ,s_email.getText(),s_entrancescore.getText(),s_fid.getText(),s_bid.getText(),s_pid.getText(),sid.getText());
+            if(Objects.equals(push, "Success")){
+                Alert.show(alertLabel,"Update Done!");
+                dptName.setText("");
+                dptId.setText("");
+                dptHOD.setText("");
+            }else{
+                Alert.show(alertLabel,push);
+            }
+        }
+    }
     //
     //////////////////////////////////Teachers TAB Menu//////////////////////////////////////////////
     //
@@ -162,6 +215,8 @@ public class HelloController {
         settingsTab.setVisible(false);
         studentsTab.setVisible(false);
         homeTab.setVisible(false);
+        batchTab.setVisible(false);
+
         // TRUE
         teachersTab.setVisible(true);
 
@@ -201,6 +256,7 @@ public class HelloController {
         teachersTab.setVisible(false);
         studentsTab.setVisible(false);
         settingsTab.setVisible(false);
+        batchTab.setVisible(false);
         homeTab.setVisible(true);
     }
     @FXML
@@ -227,4 +283,67 @@ public class HelloController {
             }
         }
     }
+    @FXML
+    private TextField fDid;
+
+    @FXML
+    private TextField fId;
+
+    @FXML
+    private TextField fName;
+    @FXML
+    void onAddFaculty(ActionEvent event) {
+        //if Faculty values are valid try and save it in the database
+        if(!fId.getText().isEmpty() && !fName.getText().isEmpty()){
+            String push = Database.addFaculty(fId.getText(), fName.getText(), fDid.getText());
+            if(Objects.equals(push, "Success")){
+                Alert.show(alertLabel,"Update Done!");
+                fDid.setText("");
+                fId.setText("");
+                fName.setText("");
+            }else{
+                Alert.show(alertLabel,push);
+            }
+        }
+    }
+
+
+
+    //////////////////////////////////// BATCH ///////////////////////////////////////
+    @FXML
+    private TabPane batchTab;
+    @FXML
+    private TextField bId;
+    @FXML
+    private TextField b_year;
+    @FXML
+    private TextField b_fId;
+    @FXML
+    private TextField b_semester;
+
+    @FXML
+    void onBatch(ActionEvent event) throws InterruptedException {
+        teachersTab.setVisible(false);
+        studentsTab.setVisible(false);
+        settingsTab.setVisible(false);
+        homeTab.setVisible(false);
+        batchTab.setVisible(true);
+    }
+
+    @FXML
+    void onAddBatch(ActionEvent event) {
+        //if Faculty values are valid try and save it in the database
+        if(!bId.getText().isEmpty() && !b_year.getText().isEmpty() && !b_fId.getText().isEmpty() && !b_semester.getText().isEmpty()){
+            String push = Database.addBatch(bId.getText(), b_year.getText(), b_fId.getText(),b_semester.getText());
+            if(Objects.equals(push, "Success")){
+                Alert.show(alertLabel,"Update Done!");
+                fDid.setText("");
+                fId.setText("");
+                fName.setText("");
+            }else{
+                Alert.show(alertLabel,push);
+            }
+        }
+    }
+
 }

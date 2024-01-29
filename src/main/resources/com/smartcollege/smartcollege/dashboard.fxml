@@ -38,7 +38,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button layoutX="14.0" layoutY="222.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Mark Sheet" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="222.0" mnemonicParsing="false" onAction="#onBatch" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Batch" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -49,6 +49,11 @@
                </font>
             </Button>
             <Button fx:id="settingsbtn" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onAction="#onSettings" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="settingsbtn1" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#onSettings" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Notice" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -88,15 +93,29 @@
                      <content>
                         <Pane prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="62.0" layoutY="42.0" text="First Name" />
-                              <TextField layoutX="262.0" layoutY="99.0" text="Contact" />
-                              <TextField layoutX="462.0" layoutY="99.0" text="Email" />
-                              <TextField layoutX="62.0" layoutY="102.0" text="Address" />
-                              <TextField layoutX="262.0" layoutY="42.0" text="Middle Name" />
-                              <TextField layoutX="462.0" layoutY="42.0" text="First Name" />
-                              <TextField layoutX="62.0" layoutY="172.0" text="Entrance Test Score" />
-                              <TextField layoutX="262.0" layoutY="172.0" text="Faculty" />
-                              <Button layoutX="294.0" layoutY="279.0" mnemonicParsing="false" text="ADD NEW STUDENT" />
+                              <TextField fx:id="s_firstname" layoutX="62.0" layoutY="42.0" />
+                              <TextField fx:id="s_contact" layoutX="262.0" layoutY="99.0" />
+                              <TextField fx:id="s_email" layoutX="462.0" layoutY="99.0" />
+                              <TextField fx:id="s_address" layoutX="62.0" layoutY="102.0" />
+                              <TextField fx:id="s_middlename" layoutX="262.0" layoutY="42.0" />
+                              <TextField fx:id="s_lastname" layoutX="462.0" layoutY="42.0" />
+                              <TextField fx:id="s_entrancescore" layoutX="62.0" layoutY="172.0" />
+                              <TextField fx:id="s_fid" layoutX="262.0" layoutY="172.0" />
+                              <Button layoutX="62.0" layoutY="341.0" mnemonicParsing="false" onAction="#onAddStudent" text="ADD NEW STUDENT" />
+                              <Label layoutX="62.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="First Name:" textFill="WHITE" />
+                              <Label layoutX="262.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="Middle Name" textFill="WHITE" />
+                              <Label layoutX="462.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="Last Name:" textFill="WHITE" />
+                              <Label layoutX="62.0" layoutY="84.0" prefHeight="17.0" prefWidth="140.0" text="Address:" textFill="WHITE" />
+                              <Label layoutX="262.0" layoutY="82.0" prefHeight="17.0" prefWidth="140.0" text="Contact No:" textFill="WHITE" />
+                              <Label layoutX="462.0" layoutY="82.0" prefHeight="17.0" prefWidth="140.0" text="Email:" textFill="WHITE" />
+                              <Label layoutX="62.0" layoutY="155.0" prefHeight="17.0" prefWidth="140.0" text="Entrance Score:" textFill="WHITE" />
+                              <Label layoutX="262.0" layoutY="155.0" prefHeight="17.0" prefWidth="140.0" text="Faculty ID:" textFill="WHITE" />
+                              <TextField fx:id="s_bid" layoutX="462.0" layoutY="168.0" />
+                              <Label layoutX="462.0" layoutY="151.0" prefHeight="17.0" prefWidth="140.0" text="Batch ID:" textFill="WHITE" />
+                              <TextField fx:id="s_pid" layoutX="62.0" layoutY="246.0" />
+                              <Label layoutX="62.0" layoutY="229.0" prefHeight="17.0" prefWidth="140.0" text="Parents ID:" textFill="WHITE" />
+                              <TextField fx:id="sid" layoutX="262.0" layoutY="245.0" />
+                              <Label layoutX="262.0" layoutY="228.0" prefHeight="17.0" prefWidth="140.0" text="Student ID:" textFill="WHITE" />
                            </children>
                         </Pane>
                      </content>
@@ -180,9 +199,86 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField layoutX="41.0" layoutY="214.0" />
-                              <TextField layoutX="41.0" layoutY="68.0" prefHeight="25.0" prefWidth="176.0" />
-                              <TextField layoutX="41.0" layoutY="138.0" prefHeight="25.0" prefWidth="223.0" />
+                              <TextField fx:id="fDid" layoutX="41.0" layoutY="214.0" />
+                              <TextField fx:id="fId" layoutX="41.0" layoutY="68.0" prefHeight="25.0" prefWidth="176.0" />
+                              <TextField fx:id="fName" layoutX="41.0" layoutY="138.0" prefHeight="25.0" prefWidth="223.0" />
+                              <Label layoutX="41.0" layoutY="43.0" text="Faculty ID:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="112.0" text="Faculty Name:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="186.0" text="Department ID:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#onAddFaculty" text="Add">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+            <TabPane fx:id="batchTab" layoutX="1.0" layoutY="-1.0" prefHeight="593.0" prefWidth="998.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="BatchList">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+                  <Tab text="Add Batch">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="bId" layoutX="41.0" layoutY="67.0" />
+                              <TextField fx:id="b_fId" layoutX="41.0" layoutY="215.0" prefHeight="25.0" prefWidth="176.0" />
+                              <TextField fx:id="b_year" layoutX="41.0" layoutY="140.0" prefHeight="25.0" prefWidth="223.0" />
+                              <Label layoutX="41.0" layoutY="43.0" text="Batch ID:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="113.0" text="Year:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="41.0" layoutY="188.0" text="Faculty ID:" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="42.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddBatch" text="Add">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="b_semester" layoutX="41.0" layoutY="293.0" prefHeight="25.0" prefWidth="176.0" />
+                              <Label layoutX="41.0" layoutY="266.0" text="Semester" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Edit Batch">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="fDid1" layoutX="41.0" layoutY="214.0" />
+                              <TextField fx:id="fId1" layoutX="41.0" layoutY="68.0" prefHeight="25.0" prefWidth="176.0" />
+                              <TextField fx:id="fName1" layoutX="41.0" layoutY="138.0" prefHeight="25.0" prefWidth="223.0" />
                               <Label layoutX="41.0" layoutY="43.0" text="Faculty ID:" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
