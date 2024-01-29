@@ -58,8 +58,13 @@
                               <TextField fx:id="port" layoutX="44.0" layoutY="118.0" prefHeight="25.0" prefWidth="174.0" promptText="port" />
                               <TextField fx:id="dbuser" layoutX="306.0" layoutY="29.0" promptText="user" />
                               <TextField fx:id="dbpass" layoutX="306.0" layoutY="74.0" promptText="password" />
-                              <Button layoutX="44.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSubmitDB" text="Connect" />
+                              <Button fx:id="databaseSubmitBtn" layoutX="44.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSubmitDB" text="Connect" />
                               <TextField fx:id="host" layoutX="44.0" layoutY="29.0" prefHeight="25.0" prefWidth="167.0" promptText="host" />
+                              <Label fx:id="databaseAlert" layoutX="44.0" layoutY="233.0" prefHeight="17.0" prefWidth="970.0" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </Pane>
                      </content>

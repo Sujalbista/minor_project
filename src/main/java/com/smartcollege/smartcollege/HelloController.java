@@ -39,6 +39,9 @@ public class HelloController {
     private TabPane settingsTab;
 
     @FXML
+    private Label databaseAlert;
+
+    @FXML
     private Button settingsbtn;
 
     //database variables
@@ -57,17 +60,19 @@ public class HelloController {
     @FXML
     private TextField port;
 
+    @FXML
+    private Button databaseSubmitBtn;
     //database submission
     @FXML
     void onSubmitDB(ActionEvent event) {
         if(!dbpass.getText().isEmpty() && !dbuser.getText().isEmpty() && !database.getText().isEmpty() && !host.getText().isEmpty() && !port.getText().isEmpty() ){
             if(Database.postDatabaseDetails(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText())){
-                System.out.println("Saved!");
+                databaseAlert.setText("Successfully saved database!");
             }else{
-                System.out.println(("Couldnt save!"));
+                databaseAlert.setText("Error occurred when saving file!");
             }
         }else{
-            System.out.println("Empty fields");
+            databaseAlert.setText("Fields cant be empty!");
         }
     }
 
@@ -92,7 +97,8 @@ public class HelloController {
                 database.setText((String) json.get("database"));
                 dbuser.setText((String) json.get("username"));
                 dbpass.setText((String) json.get("password"));
-
+                databaseSubmitBtn.setText("Update");
+                databaseAlert.setText("Above information is being used for database connection!");
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
@@ -145,7 +151,7 @@ public class HelloController {
         Background red = new Background(redFIll);
         loginbutton.setVisible(false);
         Stage mainwindow =(Stage) loginbutton.getScene().getWindow();
-        if(USERNAME.getText().equals("subu") && PASSWORD.getText().equals(("1234"))){
+        if(USERNAME.getText().equals("admin") && PASSWORD.getText().equals(("admin"))){
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
