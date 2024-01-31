@@ -1,0 +1,46 @@
+TabPane {
+  -fx-tab-min-width: 50px;
+}
+TextField {
+  -fx-background-radius: 5;
+  -fx-min-height: 30;
+  -fx-font-size: 15px;
+}
+.submitButton {
+  -fx-background-color: linear-gradient(
+    to right,
+    #b625d6,
+    #9157ec,
+    #6773f8,
+    #3987fa,
+    #0997f4
+  );
+  -fx-font-weight: bold;
+  -fx-text-fill: white;
+}
+
+.submitButton:hover {
+  -fx-background-color: rgb(24, 179, 88);
+}
+
+.tab {
+  -fx-background-color: rgb(167, 167, 167);
+  -fx-background-radius: 0;
+  -fx-background-insets: 0;
+  -fx-border-color: none;
+}
+
+.tab:selected {
+  -fx-background-color: #006494;
+  -fx-border-width: 3 0 0 0;
+  -fx-border-color: rgb(4, 195, 4);
+}
+
+.tab:selected .tab-label {
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+}
+
+.tab-header-background {
+  -fx-background-color: rgb(41, 41, 41);
+}

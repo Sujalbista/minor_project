@@ -91,10 +91,13 @@ public class HelloController {
 
     @FXML
     void onSettings(ActionEvent event) {
-        studentsTab.setVisible(false);
+        subjectTab.setVisible(false);
         teachersTab.setVisible(false);
         homeTab.setVisible(false);
         batchTab.setVisible(false);
+        studentsTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
 
         //
         //TRUE
@@ -205,14 +208,17 @@ public class HelloController {
     private TableView<Student> studentTable;
     @FXML
     void onStudents(ActionEvent event) {
-        settingsTab.setVisible(false);
+        subjectTab.setVisible(false);
         teachersTab.setVisible(false);
         homeTab.setVisible(false);
         batchTab.setVisible(false);
+        studentsTab.setVisible(true);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
 
         //
         //TRUE
-        studentsTab.setVisible(true);
+        settingsTab.setVisible(false);
 
         StudentView studentView= new StudentView(studentTable,stdID,stdName,stdAddress,stdContact,stdEmail,stdFaculty,stdBatch,stdParentId);
 
@@ -243,10 +249,13 @@ public class HelloController {
 
     @FXML
     void onTeachers(ActionEvent event) {
-        settingsTab.setVisible(false);
+        subjectTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
         studentsTab.setVisible(false);
         homeTab.setVisible(false);
         batchTab.setVisible(false);
+        settingsTab.setVisible(false);
 
         // TRUE
         teachersTab.setVisible(true);
@@ -284,6 +293,9 @@ public class HelloController {
 
     @FXML
     void onHome(ActionEvent event) throws InterruptedException {
+        subjectTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
         teachersTab.setVisible(false);
         studentsTab.setVisible(false);
         settingsTab.setVisible(false);
@@ -354,6 +366,9 @@ public class HelloController {
 
     @FXML
     void onBatch(ActionEvent event) throws InterruptedException {
+        subjectTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
         teachersTab.setVisible(false);
         studentsTab.setVisible(false);
         settingsTab.setVisible(false);
@@ -375,6 +390,55 @@ public class HelloController {
                 Alert.show(alertLabel,push);
             }
         }
+    }
+    //////=================== Home TAB =======================//
+    @FXML
+    private TabPane noticeTab;
+
+    @FXML
+    void onNotice(ActionEvent event) throws InterruptedException {
+        teachersTab.setVisible(false);
+        subjectTab.setVisible(false);
+        batchTab.setVisible(false);
+        homeTab.setVisible(false);
+        settingsTab.setVisible(false);
+        studentsTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(true);
+
+
+    }
+
+    //////=================== student TAB =======================//
+    @FXML
+    private TabPane subjectTab;
+    @FXML
+    void onSubjects(ActionEvent event) throws InterruptedException {
+        teachersTab.setVisible(false);
+        subjectTab.setVisible(true);
+        settingsTab.setVisible(false);
+        batchTab.setVisible(false);
+        homeTab.setVisible(false);
+        studentsTab.setVisible(false);
+        marksheetTab.setVisible(false);
+        noticeTab.setVisible(false);
+    }
+
+    //////=================== marks TAB =======================//
+    @FXML
+    private TabPane marksheetTab;
+
+    @FXML
+    void onMarks(ActionEvent event) throws InterruptedException {
+        teachersTab.setVisible(false);
+        subjectTab.setVisible(false);
+        settingsTab.setVisible(false);
+        batchTab.setVisible(false);
+        homeTab.setVisible(false);
+
+        studentsTab.setVisible(false);
+        marksheetTab.setVisible(true);
+        noticeTab.setVisible(false);
     }
 
 }
