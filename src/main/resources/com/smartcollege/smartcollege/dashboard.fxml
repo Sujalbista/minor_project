@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,123 +14,91 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1251.0" style="-fx-background-color: #000000;" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartcollege.smartcollege.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1251.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartcollege.smartcollege.HelloController">
    <children>
-      <Pane layoutX="10.0" layoutY="24.0" prefHeight="99.0" prefWidth="1217.0" style="-fx-background-color: #051923;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <AnchorPane layoutX="10.0" layoutY="118.0" prefHeight="612.0" prefWidth="199.0" style="-fx-background-color: #003554;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="118.0">
+      <Pane layoutX="10.0" layoutY="24.0" prefHeight="99.0" prefWidth="1217.0" style="-fx-background-color: #051923;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         
+      </Pane>
+      <Pane layoutX="10.0" layoutY="118.0" prefHeight="569.0" prefWidth="200.0" style="-fx-background-color: #003554;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="118.0">
          <children>
-            <Button fx:id="homebtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="24.0" mnemonicParsing="false" onAction="#onHome" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Home" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="22.0" mnemonicParsing="false" onAction="#onHome" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Home" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/home.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="studentsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="78.0" mnemonicParsing="false" onAction="#onStudents" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Students" textFill="WHITE">
+            <Button fx:id="studentsbtn" layoutX="14.0" layoutY="72.0" mnemonicParsing="false" onAction="#onStudents" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Students" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/students.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="teachersbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="132.0" mnemonicParsing="false" onAction="#onTeachers" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Teachers" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onAction="#onTeachers" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Teachers" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/teachers.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="attendencebtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Attendence" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="172.0" mnemonicParsing="false" onAction="#onAttendence" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Attendence" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/attendance.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="batchbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="240.0" mnemonicParsing="false" onAction="#onBatch" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Batch" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="222.0" mnemonicParsing="false" onAction="#onBatch" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Batch" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/batch.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="settingsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="554.0" mnemonicParsing="false" onAction="#onSettings" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE" AnchorPane.bottomAnchor="10.0">
+            <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Emails" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/setting.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="noticebtn" alignment="TOP_LEFT" layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#onNotice" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Notice" textFill="WHITE">
+            <Button fx:id="settingsbtn" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onAction="#onSettings" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/notice.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="subjectsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="348.0" mnemonicParsing="false" onAction="#onSubjects" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Subjects" textFill="WHITE">
+            <Button fx:id="settingsbtn1" layoutX="14.0" layoutY="372.0" mnemonicParsing="false" onAction="#onSettings" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Notice" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/subjects.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
             </Button>
-            <Button fx:id="marksbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="402.0" mnemonicParsing="false" onAction="#onMarks" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Marks" textFill="WHITE">
+            <Button fx:id="settingsbtn11" layoutX="10.0" layoutY="419.0" mnemonicParsing="false" onAction="#onSubjects" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Subjects" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
-               <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/marks.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
+            </Button>
+            <Button layoutX="14.0" layoutY="465.0" mnemonicParsing="false" onAction="#onMarks" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Marks" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
             </Button>
          </children>
-      </AnchorPane>
+      </Pane>
       <AnchorPane layoutX="218.0" layoutY="119.0" prefHeight="612.0" prefWidth="1021.0" style="-fx-background-color: #006494;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="118.0">
          <children>
+            <TabPane fx:id="settingsTab" layoutX="-5.0" layoutY="-3.0" prefHeight="616.0" prefWidth="1035.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="DATABASE">
+                     <content>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="database" layoutX="44.0" layoutY="74.0" prefHeight="25.0" prefWidth="167.0" promptText="database" />
+                              <TextField fx:id="port" layoutX="44.0" layoutY="118.0" prefHeight="25.0" prefWidth="174.0" promptText="port" />
+                              <TextField fx:id="dbuser" layoutX="306.0" layoutY="29.0" promptText="user" />
+                              <TextField fx:id="dbpass" layoutX="306.0" layoutY="74.0" promptText="password" />
+                              <Button fx:id="databaseSubmitBtn" layoutX="44.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSubmitDB" text="Connect" />
+                              <TextField fx:id="host" layoutX="44.0" layoutY="29.0" prefHeight="25.0" prefWidth="167.0" promptText="host" />
+                              <Label fx:id="databaseAlert" layoutX="44.0" layoutY="233.0" prefHeight="17.0" prefWidth="970.0" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+                  <Tab text="User" />
+               </tabs>
+            </TabPane>
             <TabPane fx:id="studentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="View Students">
@@ -215,7 +182,7 @@
                               <TextField fx:id="tFirstName" layoutX="115.0" layoutY="60.0" promptText="First Name" />
                               <TextField fx:id="tSubject" layoutX="336.0" layoutY="203.0" promptText="Subject" />
                               <TextField fx:id="tFaculty" layoutX="116.0" layoutY="201.0" promptText="Faculty" />
-                              <Button layoutX="289.0" layoutY="332.0" mnemonicParsing="false" text="ADD NEW TEACHER" />
+                              <Button layoutX="289.0" layoutY="332.0" mnemonicParsing="false" onAction="#onAddTeacher" text="ADD NEW TEACHER" />
                            </children>
                         </Pane>
                      </content></Tab>
@@ -486,7 +453,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="45.0" layoutY="230.0" mnemonicParsing="false" text="Add">
+                              <Button layoutX="45.0" layoutY="230.0" mnemonicParsing="false" onAction="#onAddSubject" text="Add">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -550,7 +517,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="120.0" layoutY="475.0" mnemonicParsing="false" text="Add marks">
+                              <Button layoutX="120.0" layoutY="475.0" mnemonicParsing="false" onAction="#onAddSubjectMarks" text="Add marks">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -568,7 +535,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="291.0" layoutY="350.0" mnemonicParsing="false" text="Search" />
+                              <Button layoutX="291.0" layoutY="350.0" mnemonicParsing="false" onAction="#onMSearchStudent" text="Search" />
                               <TableView fx:id="mStudentSearchTable" layoutX="403.0" layoutY="48.0" prefHeight="525.0" prefWidth="610.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="401.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="48.0">
                                  <columns>
                                     <TableColumn fx:id="mStudentID" prefWidth="75.0" text="ID" />
@@ -626,75 +593,6 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-               </tabs>
-            </TabPane>
-            <TabPane fx:id="noticeTab" prefHeight="612.0" prefWidth="1021.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <tabs>
-                  <Tab text="Announcement">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TextArea fx:id="announcementField" layoutX="31.0" layoutY="128.0" prefHeight="200.0" prefWidth="557.0" />
-                              <Label fx:id="announcementLabel" layoutX="31.0" layoutY="20.0" prefHeight="99.0" prefWidth="199.0" text="Notice" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="35.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="announcementbtn" contentDisplay="CENTER" layoutX="31.0" layoutY="372.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="131.0" styleClass="submitButton" text="Announce">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-                  <Tab text="Selective">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <TextField fx:id="selectiveBatch" layoutX="111.0" layoutY="66.0" prefHeight="27.0" prefWidth="150.0" promptText="BATCH" />
-                              <TextArea fx:id="selectiveField" layoutX="49.0" layoutY="213.0" prefHeight="200.0" prefWidth="445.0" />
-                              <Button fx:id="selectivebtn" layoutX="49.0" layoutY="437.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="124.0" styleClass="submitButton" text="Announce">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></Button>
-                              <Label layoutX="49.0" layoutY="67.0" prefHeight="27.0" prefWidth="62.0" text="Batch" textFill="#f7f7f7" />
-                              <Label fx:id="selectiveNotice" layoutX="49.0" layoutY="154.0" prefHeight="52.0" prefWidth="94.0" text="NOTICE" textFill="WHITE">
-                                 <font>
-                                    <Font name="Arial" size="23.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="49.0" layoutY="117.0" prefHeight="27.0" prefWidth="62.0" text="Semester" textFill="#fcfcfc" />
-                              <TextField fx:id="selectiveSemester" layoutX="111.0" layoutY="116.0" prefHeight="27.0" prefWidth="150.0" promptText="SEMESTER" />
-                           </children>
-                        </AnchorPane>
-                     </content>
-                  </Tab>
-               </tabs>
-            </TabPane>
-            <TabPane fx:id="settingsTab" layoutX="-5.0" layoutY="-3.0" prefHeight="616.0" prefWidth="1035.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <tabs>
-                  <Tab text="DATABASE">
-                     <content>
-                        <Pane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <TextField fx:id="database" layoutX="44.0" layoutY="74.0" prefHeight="25.0" prefWidth="167.0" promptText="database" />
-                              <TextField fx:id="port" layoutX="44.0" layoutY="118.0" minHeight="28.0" prefHeight="28.0" prefWidth="81.0" promptText="port" />
-                              <TextField fx:id="dbuser" layoutX="306.0" layoutY="29.0" promptText="user" />
-                              <TextField fx:id="dbpass" layoutX="306.0" layoutY="74.0" promptText="password" />
-                              <Button fx:id="databaseSubmitBtn" layoutX="44.0" layoutY="181.0" mnemonicParsing="false" onAction="#onSubmitDB" prefHeight="35.0" prefWidth="79.0" styleClass="submitButton" text="Connect" />
-                              <TextField fx:id="host" layoutX="44.0" layoutY="29.0" prefHeight="25.0" prefWidth="167.0" promptText="host" />
-                              <Label fx:id="databaseAlert" layoutX="44.0" layoutY="233.0" prefHeight="17.0" prefWidth="970.0" textFill="WHITE">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </Pane>
-                     </content>
-                  </Tab>
-                  <Tab text="User" />
                </tabs>
             </TabPane>
          </children>

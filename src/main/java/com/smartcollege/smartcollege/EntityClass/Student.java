@@ -12,6 +12,19 @@ public class Student {
     private SimpleStringProperty stdFaculty;
     private SimpleStringProperty stdBatch;
     private SimpleIntegerProperty stdParentId;
+    private SimpleStringProperty stdSemester;
+
+    public void setStdSemester(String stdSemester) {
+        this.stdSemester.set(stdSemester);
+    }
+
+    public String getStdSemester() {
+        return stdSemester.get();
+    }
+
+    public SimpleStringProperty stdSemesterProperty() {
+        return stdSemester;
+    }
 
     public int getStdID() {
         return stdID.get();
@@ -118,7 +131,11 @@ public class Student {
         this.stdContact = new SimpleIntegerProperty(contact);
         this.stdParentId = new SimpleIntegerProperty(parnetID);
         this.stdEmail = new SimpleStringProperty(email);
-
-
+    }
+    public Student(Integer id, String name, String batch, String semester){
+        this.stdBatch =new SimpleStringProperty(batch);
+        this.stdName = new SimpleStringProperty(name);
+        this.stdID =new SimpleIntegerProperty(id);
+        this.stdSemester = new SimpleStringProperty(semester);
     }
 }

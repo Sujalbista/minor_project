@@ -1,7 +1,7 @@
 package com.smartcollege.smartcollege;
 
+import Encryption.Encryption;
 import com.smartcollege.smartcollege.database.Database;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -43,16 +43,19 @@ public class Dashboard{
             try(FileReader reader = new FileReader("./src/main/resources/config/config.json")){
                 Object obj = jsonParser.parse(reader);
                 JSONObject json = (JSONObject) obj;
-                String checkConnection = Database.getConnection(json.get("host").toString(),json.get("database").toString(),json.get("username").toString(),json.get("password").toString(),json.get("port").toString());
+                String checkConnection = Database.getConnection(json.get("host").toString(),json.get("database").toString(),json.get("username").toString(), Encryption.decrypt(json.get("password").toString()),json.get("port").toString());
                 if(Objects.equals(checkConnection, "connected")){
-                    System.out.println("Connected to database.");
+                   System.out.println("Connected to database.");
                 }else{
                     System.out.println(checkConnection);
                 }
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }else{
+
         }
     }
 }
