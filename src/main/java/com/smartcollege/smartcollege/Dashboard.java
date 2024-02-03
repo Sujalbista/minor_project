@@ -2,6 +2,7 @@ package com.smartcollege.smartcollege;
 
 import Encryption.Encryption;
 import com.smartcollege.smartcollege.database.Database;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,7 +29,7 @@ public class Dashboard{
     private void openDashboard(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-//        scene.getStylesheets().add(getClass().getResource("test.css").toExternalForm());
+//        scene.getStylesheets().add(getClass().getResource("./src/main/resources/css/test.css").toExternalForm());
         stage.setTitle("Admin Dashboard");
         stage.setScene(scene);
         stage.setMaximized(true);
@@ -45,8 +46,9 @@ public class Dashboard{
                 JSONObject json = (JSONObject) obj;
                 String checkConnection = Database.getConnection(json.get("host").toString(),json.get("database").toString(),json.get("username").toString(), Encryption.decrypt(json.get("password").toString()),json.get("port").toString());
                 if(Objects.equals(checkConnection, "connected")){
-                   System.out.println("Connected to database.");
+                    System.out.println("Connected to database.");
                 }else{
+
                     System.out.println(checkConnection);
                 }
             } catch (IOException | ParseException e) {

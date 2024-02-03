@@ -9,6 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.mail.Address;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,13 +29,13 @@ public class Database{
 
     public static String addAttendence(String data){
         try{
-        JSONParser jsonParser = new JSONParser();
-        Object rawJson = jsonParser.parse(data);
-        JSONObject json = (JSONObject) rawJson;
-        String sid = json.get("sid").toString();
-        String bid = json.get("bid").toString();
-        String date = LocalDate.now().toString();
-        String semester = json.get("semester").toString();
+            JSONParser jsonParser = new JSONParser();
+            Object rawJson = jsonParser.parse(data);
+            JSONObject json = (JSONObject) rawJson;
+            String sid = json.get("sid").toString();
+            String bid = json.get("bid").toString();
+            String date = LocalDate.now().toString();
+            String semester = json.get("semester").toString();
 
             String checkAttendence = "SELECT * FROM `"+bid+"attendence` WHERE sid="+sid+" AND date = '"+date+"';";
             PreparedStatement checkStatement = con.prepareStatement(checkAttendence);
@@ -270,7 +273,7 @@ public class Database{
     }
     public static String addStudent(String firstname,String middlename, String lastname, String adderss,
                                     String contact, String email, String entrance,
-                                    String fid,String bid, String pid, String sid) throws IOException, WriterException {
+                                    String fid,String bid, String pid, String sid) throws IOException, WriterException, AddressException {
         String feedback = "";
         //first check if the table exists or not
         if(connected){
@@ -306,11 +309,9 @@ public class Database{
                 String charset = "UTF-8";
 
                 Map<EncodeHintType, ErrorCorrectionLevel> hashMap
-                        = new HashMap<EncodeHintType,
-                                                ErrorCorrectionLevel>();
+                        = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
 
-                hashMap.put(EncodeHintType.ERROR_CORRECTION,
-                        ErrorCorrectionLevel.L);
+                hashMap.put(EncodeHintType.ERROR_CORRECTION,ErrorCorrectionLevel.L);
 
                 generateQRCode(data, path, charset, hashMap, 200, 200);
                 System.out.println("QR Code Generated!!! ");
@@ -318,9 +319,12 @@ public class Database{
                 //////////////Email Qr code/////////////////////
                 EmailSender sendmail  = new EmailSender();
                 String to= email;
-                String subject= "welcome from College";
+                String subject= String.valueOf(new String[]{"welcome " + firstname +" "+ middlename+" "+lastname});
                 String text="This is your QR code for Attendance";
-                sendmail.sendEmail(to,subject, text,path);
+                Address[] toAddresses = new Address[] { new InternetAddress(to) };
+
+                // Use the sendEmails method from the EmailSender class
+                EmailSender.sendEmail(toAddresses, subject, text, path);
 
             }else{
                 //create table

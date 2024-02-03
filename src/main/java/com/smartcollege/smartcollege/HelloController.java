@@ -1,38 +1,42 @@
 package com.smartcollege.smartcollege;
 
 import Encryption.Encryption;
+import com.smartcollege.smartcollege.EntityClass.AttendenceStudent;
 import com.smartcollege.smartcollege.EntityClass.Student;
+import com.smartcollege.smartcollege.database.Notice;
+import com.smartcollege.smartcollege.tableview.AttendenceView;
 import com.smartcollege.smartcollege.tableview.MarksStudentSearch;
 import com.smartcollege.smartcollege.tableview.StudentView;
 import com.google.zxing.WriterException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import com.smartcollege.smartcollege.HelloApplication;
 import com.smartcollege.smartcollege.database.Database;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
+import javax.mail.Address;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 public class HelloController {
-    private String[] semesters = {"I","II","III","IV","V","VI","VII","VIII"};
-    private String[] terminals = {"1st Term", "2ndTerm", "3rd Term", "Pre-board"};
+    private String[] semesters = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
+    private String[] terminals = { "1st Term", "2ndTerm", "3rd Term", "Pre-board" };
     @FXML
     private Label alertLabel;
-
 
     @FXML
     private PasswordField PASSWORD;
@@ -50,9 +54,8 @@ public class HelloController {
     void onCloseAlert(ActionEvent event) {
         alertLabel.getParent().setVisible(false);
     }
-    //
-    /////////////////////////////////Settings TAB Menu //////////////////////////////////////////
-    //
+
+    ///////////////////////////////// SettingsTABMenu//////////////////////////////////
     @FXML
     private TabPane settingsTab;
 
@@ -62,7 +65,7 @@ public class HelloController {
     @FXML
     private Button settingsbtn;
 
-    //database variables
+    // database variables
     @FXML
     private TextField database;
 
@@ -80,43 +83,41 @@ public class HelloController {
 
     @FXML
     private Button databaseSubmitBtn;
-    //database submission
+
+    // database submission
     @FXML
     void onSubmitDB(ActionEvent event) {
-        if(!dbpass.getText().isEmpty() && !dbuser.getText().isEmpty() && !database.getText().isEmpty() && !host.getText().isEmpty() && !port.getText().isEmpty() ){
-            if(Database.postDatabaseDetails(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText())){
+        if (!dbpass.getText().isEmpty() && !dbuser.getText().isEmpty() && !database.getText().isEmpty()
+                && !host.getText().isEmpty() && !port.getText().isEmpty()) {
+            if (Database.postDatabaseDetails(host.getText(), database.getText(), dbuser.getText(), dbpass.getText(),
+                    port.getText())) {
                 databaseAlert.setText("Successfully saved database!");
                 requestConnection();
-            }else{
+            } else {
                 databaseAlert.setText("Error occurred when saving file!");
             }
-        }else{
+        } else {
             databaseAlert.setText("Fields cant be empty!");
         }
     }
 
-
     @FXML
     void onSettings(ActionEvent event) {
-        studentsTab.setVisible(false);
-        teachersTab.setVisible(false);
-        homeTab.setVisible(false);
-        batchTab.setVisible(false);
-        subjectTab.setVisible(false);
-        marksheetTab.setVisible(false);
+        onMainButton(event);
+        settingsTab.setVisible(true);
 
         //
-        //TRUE
-        settingsTab.setVisible(true);
-        //check if there is database info stored in the config file.
+        // TRUE
+        // check if there is database info stored in the config file.
         checkAndConnect();
 
     }
+
     ///////////////////////////////////// DATABASE///////////////////////////////////////
-    private void checkAndConnect(){
-        if(Database.checkDatabaseDetails()){
+    private void checkAndConnect() {
+        if (Database.checkDatabaseDetails()) {
             JSONParser jsonParser = new JSONParser();
-            try(FileReader reader = new FileReader("./src/main/resources/config/config.json")){
+            try (FileReader reader = new FileReader("./src/main/resources/config/config.json")) {
                 Object obj = jsonParser.parse(reader);
                 JSONObject json = (JSONObject) obj;
 
@@ -134,21 +135,22 @@ public class HelloController {
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-        }else{
+        } else {
             databaseAlert.setText("Database info not found!");
         }
     }
-    private void requestConnection(){
-        String checkConnection = Database.getConnection(host.getText(),database.getText(),dbuser.getText(),dbpass.getText(),port.getText());
-        if(Objects.equals(checkConnection, "connected")){
+
+    private void requestConnection() {
+        String checkConnection = Database.getConnection(host.getText(), database.getText(), dbuser.getText(),
+                dbpass.getText(), port.getText());
+        if (Objects.equals(checkConnection, "connected")) {
             databaseAlert.setText("Connected to database.");
-        }else{
+        } else {
             databaseAlert.setText(checkConnection);
         }
     }
-    //
-    ///////////////////////////////////////// Students TAB Menu///////////////////////////////////
-    //
+
+    ///////////////////////////////////////// StudentsTABMenu///////////////////////////////////
     @FXML
     private TabPane studentsTab;
 
@@ -214,41 +216,39 @@ public class HelloController {
 
     @FXML
     private TableView<Student> studentTable;
+
     @FXML
     void onStudents(ActionEvent event) {
-        settingsTab.setVisible(false);
-        teachersTab.setVisible(false);
-        homeTab.setVisible(false);
-        batchTab.setVisible(false);
-        subjectTab.setVisible(false);
-        marksheetTab.setVisible(false);
-
-        //
-        //TRUE
+        onMainButton(event);
         studentsTab.setVisible(true);
 
-        StudentView studentView= new StudentView(studentTable,stdID,stdName,stdAddress,stdContact,stdEmail,stdFaculty,stdBatch,stdParentId);
+        StudentView studentView = new StudentView(studentTable, stdID, stdName, stdAddress, stdContact, stdEmail,
+                stdFaculty, stdBatch, stdParentId);
 
     }
+
     @FXML
-    void onAddStudent(ActionEvent event) throws IOException, WriterException {
-        //if department values are valid try and save it in the database
-        if(!s_address.getText().isEmpty() && !s_pid.getText().isEmpty() && !s_bid.getText().isEmpty() && !sid.getText().isEmpty() && !s_contact.getText().isEmpty()
-                && !s_email.getText().isEmpty() && !s_entrancescore.getText().isEmpty() && !s_fid.getText().isEmpty() && !s_firstname.getText().isEmpty() && !s_lastname.getText().isEmpty()
-        ){
-            String push = Database.addStudent(s_firstname.getText(),s_middlename.getText(),s_lastname.getText(),s_address.getText(),s_contact.getText()
-                    ,s_email.getText(),s_entrancescore.getText(),s_fid.getText(),s_bid.getText(),s_pid.getText(),sid.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+    void onAddStudent(ActionEvent event) throws IOException, WriterException, AddressException {
+        // if department values are valid try and save it in the database
+        if (!s_address.getText().isEmpty() && !s_pid.getText().isEmpty() && !s_bid.getText().isEmpty()
+                && !sid.getText().isEmpty() && !s_contact.getText().isEmpty()
+                && !s_email.getText().isEmpty() && !s_entrancescore.getText().isEmpty() && !s_fid.getText().isEmpty()
+                && !s_firstname.getText().isEmpty() && !s_lastname.getText().isEmpty()) {
+            String push = Database.addStudent(s_firstname.getText(), s_middlename.getText(), s_lastname.getText(),
+                    s_address.getText(), s_contact.getText(), s_email.getText(), s_entrancescore.getText(),
+                    s_fid.getText(), s_bid.getText(), s_pid.getText(), sid.getText());
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 dptName.setText("");
                 dptId.setText("");
                 dptHOD.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
         }
     }
-    /////////////////////////////////SUBJECTS////////////////////////////////////////////////////////
+
+    ///////////////////////////////// SUBJECTS////////////////////////////////////////////////////////
     @FXML
     private TextField subjectName;
 
@@ -258,35 +258,28 @@ public class HelloController {
     private TabPane subjectTab;
 
     @FXML
-    void onAddSubject(ActionEvent event){
-        if(!subjectName.getText().isEmpty() && !subSemester.getText().isEmpty()){
+    void onAddSubject(ActionEvent event) {
+        if (!subjectName.getText().isEmpty() && !subSemester.getText().isEmpty()) {
             String push = Database.addSubject(subjectName.getText(), subSemester.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 dptName.setText("");
                 dptId.setText("");
                 dptHOD.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
-        }else{
-            Alert.show(alertLabel, "Fields are empty!");
+        } else {
+            com.smartcollege.smartcollege.Alert.show(alertLabel, "Fields are empty!");
         }
     }
     @FXML
     void onSubjects(ActionEvent event) {
-        settingsTab.setVisible(false);
-        studentsTab.setVisible(false);
-        homeTab.setVisible(false);
-        batchTab.setVisible(false);
-        teachersTab.setVisible(false);
-        marksheetTab.setVisible(false);
-
-        // TRUE
+        onMainButton(event);
         subjectTab.setVisible(true);
 
     }
-    //////////////////////////////////Teachers TAB Menu//////////////////////////////////////////////
+    ////////////////////////////////// TeachersTAB//////////////////////////////////
     //
     @FXML
     private TabPane teachersTab;
@@ -313,38 +306,30 @@ public class HelloController {
 
     @FXML
     private TextField tSubject;
+
     @FXML
     void onAddTeacher(ActionEvent event) {
-        if(!tFirstName.getText().isEmpty() && !tMiddleName.getText().isEmpty() && !tLastName.getText().isEmpty() && !tAddress.getText().isEmpty() && !tContact.getText().isEmpty()
-                && !tEmail.getText().isEmpty() && !tFaculty.getText().isEmpty() && !tSubject.getText().isEmpty()){
-            String push = Database.addTeacher(tFirstName.getText(),tMiddleName.getText(),tLastName.getText(),tAddress.getText(),tContact.getText(),tEmail.getText(),tFaculty.getText(),tSubject.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+        if (!tFirstName.getText().isEmpty() && !tMiddleName.getText().isEmpty() && !tLastName.getText().isEmpty()
+                && !tAddress.getText().isEmpty() && !tContact.getText().isEmpty()
+                && !tEmail.getText().isEmpty() && !tFaculty.getText().isEmpty() && !tSubject.getText().isEmpty()) {
+            String push = Database.addTeacher(tFirstName.getText(), tMiddleName.getText(), tLastName.getText(),
+                    tAddress.getText(), tContact.getText(), tEmail.getText(), tFaculty.getText(), tSubject.getText());
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 dptName.setText("");
                 dptId.setText("");
                 dptHOD.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
         }
     }
 
     @FXML
     void onTeachers(ActionEvent event) {
-        settingsTab.setVisible(false);
-        studentsTab.setVisible(false);
-        homeTab.setVisible(false);
-        batchTab.setVisible(false);
-        subjectTab.setVisible(false);
-        marksheetTab.setVisible(false);
-
-        // TRUE
+        onMainButton(event);
         teachersTab.setVisible(true);
-
     }
-
-
-
 
     @FXML
     void onLogin(ActionEvent event) throws InterruptedException {
@@ -353,14 +338,14 @@ public class HelloController {
         BackgroundFill redFIll = new BackgroundFill(Color.GREEN, null, null);
         Background red = new Background(redFIll);
         loginbutton.setVisible(false);
-        Stage mainwindow =(Stage) loginbutton.getScene().getWindow();
-        if(USERNAME.getText().equals("admin") && PASSWORD.getText().equals(("admin"))){
+        Stage mainwindow = (Stage) loginbutton.getScene().getWindow();
+        if (USERNAME.getText().equals("admin") && PASSWORD.getText().equals(("admin"))) {
             feedback.setText("Success! Opening Dashboard...");
             feedback.setTextFill(Color.GREEN);
             HelloApplication.loggedin = true;
-            Dashboard dashboard = new Dashboard(mainwindow);
+            com.smartcollege.smartcollege.Dashboard dashboard = new com.smartcollege.smartcollege.Dashboard(mainwindow);
 
-        }else{
+        } else {
             feedback.setText("Failed! Try again!");
             feedback.setTextFill(Color.RED);
             USERNAME.setText("");
@@ -369,38 +354,33 @@ public class HelloController {
         }
     }
 
-
-
-    //////=================== Home TAB =======================//
+    ////// =================== Home TAB =======================//
     @FXML
     private TabPane homeTab;
 
     @FXML
     private Label studentCount;
+
     @FXML
     void onHome(ActionEvent event) throws InterruptedException {
-        teachersTab.setVisible(false);
-        studentsTab.setVisible(false);
-        settingsTab.setVisible(false);
-        batchTab.setVisible(false);
-        marksheetTab.setVisible(false);
-
+        onMainButton(event);
         homeTab.setVisible(true);
-        subjectTab.setVisible(false);
         initDashboard();
     }
-    private void initDashboard(){
-        try{
+
+    private void initDashboard() {
+        try {
             String sql = "SELECT COUNT(sid) from students";
             PreparedStatement statement = Database.con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             result.next();
             String count = result.getString("COUNT(sid)");
             studentCount.setText(count);
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     private TextField dptHOD;
 
@@ -412,19 +392,20 @@ public class HelloController {
 
     @FXML
     void onAddDepartment(ActionEvent event) {
-        //if department values are valid try and save it in the database
-        if(!dptId.getText().isEmpty() && !dptName.getText().isEmpty()){
+        // if department values are valid try and save it in the database
+        if (!dptId.getText().isEmpty() && !dptName.getText().isEmpty()) {
             String push = Database.addDepartment(dptId.getText(), dptName.getText(), dptHOD.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 dptName.setText("");
                 dptId.setText("");
                 dptHOD.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
         }
     }
+
     @FXML
     private TextField fDid;
 
@@ -433,25 +414,25 @@ public class HelloController {
 
     @FXML
     private TextField fName;
+
     @FXML
     void onAddFaculty(ActionEvent event) {
-        //if Faculty values are valid try and save it in the database
-        if(!fId.getText().isEmpty() && !fName.getText().isEmpty()){
+        // if Faculty values are valid try and save it in the database
+        if (!fId.getText().isEmpty() && !fName.getText().isEmpty()) {
             String push = Database.addFaculty(fId.getText(), fName.getText(), fDid.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 fDid.setText("");
                 fId.setText("");
                 fName.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
         }
     }
 
-
-
-    //////////////////////////////////// BATCH ///////////////////////////////////////
+    //////////////////////////////////// BATCH
+    //////////////////////////////////// ///////////////////////////////////////
     @FXML
     private TabPane batchTab;
     @FXML
@@ -465,40 +446,77 @@ public class HelloController {
 
     @FXML
     void onBatch(ActionEvent event) throws InterruptedException {
-        teachersTab.setVisible(false);
-        studentsTab.setVisible(false);
-        settingsTab.setVisible(false);
-        homeTab.setVisible(false);
-        subjectTab.setVisible(false);
-        marksheetTab.setVisible(false);
+        onMainButton(event);
         batchTab.setVisible(true);
     }
 
     @FXML
     void onAddBatch(ActionEvent event) {
-        //if Faculty values are valid try and save it in the database
-        if(!b_year.getText().isEmpty() && !b_fId.getText().isEmpty() && !b_semester.getText().isEmpty()){
-            String push = Database.addBatch(b_year.getText(), b_fId.getText(),b_semester.getText());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
+        // if Faculty values are valid try and save it in the database
+        if (!b_year.getText().isEmpty() && !b_fId.getText().isEmpty() && !b_semester.getText().isEmpty()) {
+            String push = Database.addBatch(b_year.getText(), b_fId.getText(), b_semester.getText());
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
                 fDid.setText("");
                 fId.setText("");
                 fName.setText("");
-            }else{
-                Alert.show(alertLabel,push);
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
         }
     }
 
     ///////////////////////////// ATTENDENCE /////////////////////////
+    @FXML
+    private TableColumn<AttendenceStudent, String> aDateComumn;
 
     @FXML
+    private TableColumn<AttendenceStudent, String> aFacultyColumn;
+
+    @FXML
+    private TableColumn<AttendenceStudent, String> aNameColumn;
+
+    @FXML
+    private TableColumn<AttendenceStudent, String> aSemester;
+
+    @FXML
+    private TableColumn<AttendenceStudent, Integer> aSidColumn;
+
+    @FXML
+    private TableColumn<AttendenceStudent, String> aTimeColumn;
+    @FXML
+    private TableView<AttendenceStudent> attendenceTable;
+    @FXML
+    private TabPane attendenceTab;
+    @FXML
+    private DatePicker aDatePicker;
+    @FXML
+    private TextField aBatchID;
+    AttendenceView attendenceView;
+    @FXML
     void onAttendence(ActionEvent event) throws IOException {
-        System.out.println("triggered");
-        Attendence attendence = new Attendence();
+
+        onMainButton(event);
+        attendenceTab.setVisible(true);
+        attendenceView = new AttendenceView(attendenceTable,aDateComumn,aFacultyColumn,aNameColumn,aSemester,aSidColumn,aTimeColumn);
+
+    }
+    @FXML
+    void startAttendence(ActionEvent event) throws IOException{
+        com.smartcollege.smartcollege.Attendence attendence = new com.smartcollege.smartcollege.Attendence();
         attendence.run();
     }
-    ///////////////////////////////////// MARKS ///////////////////////////////////////
+    @FXML
+    void onChangeAttendenceDate(ActionEvent event) {
+        if(!aDatePicker.getValue().toString().isEmpty() && !aBatchID.getText().isEmpty()){
+            attendenceView.updateTable(aBatchID.getText(),aDatePicker.getValue().toString());
+        }
+    }
+
+
+
+    ///////////////////////////////////// MARKS
+    ///////////////////////////////////// ///////////////////////////////////////
     @FXML
     private TextField mStdID;
 
@@ -506,7 +524,7 @@ public class HelloController {
     private TextField mStdMarks;
 
     @FXML
-    private TableColumn<Student,String> mStudentBatch;
+    private TableColumn<Student, String> mStudentBatch;
 
     @FXML
     private TableColumn<Student, Integer> mStudentID;
@@ -533,37 +551,162 @@ public class HelloController {
 
     @FXML
     void onAddSubjectMarks(ActionEvent event) {
-        if(!mStdID.getText().isEmpty() && !mStdMarks.getText().isEmpty() && !mSubID.getText().isEmpty() && !mSemList.getValue().isEmpty() && !mTermList.getValue().isEmpty()){
-            String push =Database.addMarks(mSubID.getText(), mSemList.getValue(),mStdMarks.getText(),mStdID.getText(),mTermList.getValue());
-            if(Objects.equals(push, "Success")){
-                Alert.show(alertLabel,"Update Done!");
-            }else{
-                Alert.show(alertLabel,push);
+        if (!mStdID.getText().isEmpty() && !mStdMarks.getText().isEmpty() && !mSubID.getText().isEmpty()
+                && !mSemList.getValue().isEmpty() && !mTermList.getValue().isEmpty()) {
+            String push = Database.addMarks(mSubID.getText(), mSemList.getValue(), mStdMarks.getText(),
+                    mStdID.getText(), mTermList.getValue());
+            if (Objects.equals(push, "Success")) {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, "Update Done!");
+            } else {
+                com.smartcollege.smartcollege.Alert.show(alertLabel, push);
             }
-        }else{
-            Alert.show(alertLabel,"Please fill the form properly!");
+        } else {
+            com.smartcollege.smartcollege.Alert.show(alertLabel, "Please fill the form properly!");
         }
     }
 
     @FXML
-    void onMarks(ActionEvent event) throws InterruptedException{
-        teachersTab.setVisible(false);
-        studentsTab.setVisible(false);
-        settingsTab.setVisible(false);
-        homeTab.setVisible(false);
-        subjectTab.setVisible(false);
-        batchTab.setVisible(false);
+    void onMarks(ActionEvent event) throws InterruptedException {
+        onMainButton(event);
         marksheetTab.setVisible(true);
-
         mSemList.getItems().clear();
         mTermList.getItems().clear();
         mSemList.getItems().addAll(semesters);
         mTermList.getItems().addAll(terminals);
     }
+
     @FXML
-    void onMSearchStudent(ActionEvent event) {
-        if(!mStdID.getText().isEmpty()){
-            MarksStudentSearch studentSearch = new MarksStudentSearch(mStdID.getText(),mStudentSearchTable,mStudentID,mStudentName, mStudentBatch,mStudentSemester);
+    void onMSearchStudent(KeyEvent event) {
+        System.out.println("hmm");
+        if (!mStdID.getText().isEmpty()) {
+            MarksStudentSearch studentSearch = new MarksStudentSearch(mStdID, mStudentSearchTable, mStudentID,
+                    mStudentName, mStudentBatch, mStudentSemester);
+
         }
     }
+
+    ///////////////////////////// NOTICE /////////////////////////
+    @FXML
+    private TextArea announcementField;
+
+    @FXML
+    private Label announcementLabel;
+
+    @FXML
+    private Button announcementbtn;
+    @FXML
+    private TabPane noticeTab;
+
+    @FXML
+    private Button noticebtn;
+    @FXML
+    private TextField selectiveBatch;
+
+    @FXML
+    private TextArea selectiveField;
+
+    @FXML
+    private Label selectiveNotice;
+
+    @FXML
+    private TextField selectiveSemester;
+
+    @FXML
+    private Button selectivebtn;
+
+    @FXML
+    void onNotice(ActionEvent event) {
+
+        onMainButton(event);
+        noticeTab.setVisible(true);
+    }
+
+    @FXML
+    void onSelectiveannouncement(ActionEvent e) {
+        int batchId;
+        String semester;
+        batchId = Integer.parseInt(selectiveBatch.getText());
+        // semester= selectiveSemester.getText();
+
+        List<String> batchSemesterStudentEmails = Notice.getStudentEmailsByBatchAndSemester(Integer.parseInt(String.valueOf(batchId)));
+
+        System.out.println("All Student Emails:");
+        for (String email : batchSemesterStudentEmails) {
+            System.out.println(email);
+        }
+
+    }
+
+    @FXML
+    void onAnnouncement(ActionEvent event) {
+        String text = announcementField.getText();
+        String subject = "Notice from Campus Flow";
+        List<String> studentEmails = Notice.getStudentEmails();
+
+        Address[] toAddresses = new InternetAddress[studentEmails.size()];
+        for (int i = 0; i < studentEmails.size(); i++) {
+            try {
+                toAddresses[i] = new InternetAddress(studentEmails.get(i));
+            } catch (AddressException e) {
+                e.printStackTrace();
+            }
+        }
+
+        com.smartcollege.smartcollege.EmailSender.sendEmail(toAddresses, subject, text);
+    }
+
+
+
+
+    ///////////////////////////////////////////// select
+    ///////////////////////////////////////////// tab////////////////////////////////
+    @FXML
+    private Button homebtn;
+    @FXML
+    private Button teachersbtn;
+    @FXML
+    private Button attendencebtn;
+    @FXML
+    private Button batchbtn;
+    @FXML
+    private Button subjectsbtn;
+    @FXML
+    private Button marksbtn;
+
+    void onMainButton(ActionEvent event) {
+        teachersTab.setVisible(false);
+        teachersbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        attendencebtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        studentsTab.setVisible(false);
+        studentsbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        settingsTab.setVisible(false);
+        settingsbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        homeTab.setVisible(false);
+        homebtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        subjectTab.setVisible(false);
+        subjectsbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        batchTab.setVisible(false);
+        batchbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        marksheetTab.setVisible(false);
+        marksbtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        attendenceTab.setVisible(false);
+        attendencebtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        noticeTab.setVisible(false);
+        noticebtn.setStyle("-fx-background-color: none;-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+        Button clickedButton = (Button) event.getSource();
+        clickedButton.setStyle(
+                "-fx-background-color: linear-gradient(to right,#b625d6,#9157ec,#6773f8,#3987fa,#0997f4);-fx-font-weight: bold;-fx-text-fill: white;-fx-font-size: 20px;");
+
+    }
+
 }

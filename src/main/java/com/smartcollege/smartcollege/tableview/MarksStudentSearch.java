@@ -5,7 +5,9 @@ import com.smartcollege.smartcollege.database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.PreparedStatement;
@@ -21,6 +23,7 @@ public class MarksStudentSearch {
     private TableColumn<Student,Integer> stdID;
     private TableView<Student> tableView;
     private String search;
+    private TextField mStdID;
     ObservableList<Student> studentData(){
         Vector<Student> studentVector = new Vector<Student>();
         Integer id;
@@ -50,13 +53,14 @@ public class MarksStudentSearch {
 
         return FXCollections.observableArrayList(studentVector);
     }
-    public MarksStudentSearch(String search, TableView<Student> studentTable, TableColumn<Student, Integer> stdID, TableColumn<Student, String> stdName, TableColumn<Student, String> stdBatch, TableColumn<Student, String> stdSemester) {
+    public MarksStudentSearch(TextField mStdID, javafx.scene.control.TableView<Student> studentTable, javafx.scene.control.TableColumn<Student, Integer> stdID, javafx.scene.control.TableColumn<Student, String> stdName, javafx.scene.control.TableColumn<Student, String> stdBatch, javafx.scene.control.TableColumn<Student, String> stdSemester) {
         this.tableView = studentTable;
         this.stdBatch = stdBatch;
         this.stdSemester= stdSemester;
         this.stdName = stdName;
         this.stdID = stdID;
-        this.search = search;
+        this.search = mStdID.getText();
+        this.mStdID = mStdID;
 
         this.stdName.setCellValueFactory(new PropertyValueFactory<Student, String>("stdName"));
         this.stdID.setCellValueFactory(new PropertyValueFactory<Student, Integer>("stdID"));
@@ -64,6 +68,17 @@ public class MarksStudentSearch {
         this.stdSemester.setCellValueFactory(new PropertyValueFactory<Student, String>("stdSemester"));
 
         tableView.setItems(studentData());
+
+        tableView.setRowFactory(tv -> {
+            TableRow<Student> row = new TableRow<Student>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Student rowData = row.getItem();
+                    mStdID.setText(rowData.getStdID()+"");
+                }
+            });
+            return row ;
+        });
     }
 
 

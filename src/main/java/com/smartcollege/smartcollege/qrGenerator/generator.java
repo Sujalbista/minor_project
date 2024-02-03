@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.google.zxing.client.j2se.MatrixToImageWriter.writeToFile;
+
 
 public class generator {
     public static void generateQRCode(String data, String path, String charset, Map map, int h, int w) throws WriterException, IOException {

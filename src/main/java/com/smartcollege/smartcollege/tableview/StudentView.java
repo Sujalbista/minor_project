@@ -59,7 +59,7 @@ public class StudentView {
 
         return FXCollections.observableArrayList(studentVector);
     }
-    public StudentView(TableView<Student> studentTable, TableColumn<Student, Integer> stdID, TableColumn<Student, String> stdName, TableColumn<Student, String> stdAddress, TableColumn<Student, Integer> stdContact, TableColumn<Student, String> stdEmail, TableColumn<Student, String> stdFaculty, TableColumn<Student, String> stdBatch, TableColumn<Student, Integer> stdParentId) {
+    public StudentView(javafx.scene.control.TableView<Student> studentTable, javafx.scene.control.TableColumn<Student, Integer> stdID, javafx.scene.control.TableColumn<Student, String> stdName, javafx.scene.control.TableColumn<Student, String> stdAddress, javafx.scene.control.TableColumn<Student, Integer> stdContact, javafx.scene.control.TableColumn<Student, String> stdEmail, javafx.scene.control.TableColumn<Student, String> stdFaculty, javafx.scene.control.TableColumn<Student, String> stdBatch, javafx.scene.control.TableColumn<Student, Integer> stdParentId) {
         this.tableView = studentTable;
         this.stdParentId = stdParentId;
         this.stdBatch = stdBatch;
