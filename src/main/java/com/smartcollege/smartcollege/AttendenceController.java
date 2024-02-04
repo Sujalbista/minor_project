@@ -42,7 +42,7 @@ public class AttendenceController {
     void startAttendence(ActionEvent event) {
         Button button = (Button) event.getSource();
         button.setVisible(false);
-        webcam = Webcam.getWebcams().get(1);
+        webcam = Webcam.getWebcams().get(0);
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam.setViewSize(size);
         SwingUtilities.invokeLater(() -> {
