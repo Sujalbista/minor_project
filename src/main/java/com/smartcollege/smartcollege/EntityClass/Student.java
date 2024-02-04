@@ -14,6 +14,9 @@ public class Student {
     private SimpleIntegerProperty stdParentId;
     private SimpleStringProperty stdSemester;
 
+    public Student(Integer id, String name, String address, Integer contact, String email, Integer parentId) {
+    }
+
     public void setStdSemester(String stdSemester) {
         this.stdSemester.set(stdSemester);
     }

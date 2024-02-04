@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Anime Nepal - Best Anime Community
+                                  "
+    />
+    <meta
+      name="keywords"
+      content="Live, Chat, Faster Chat, Group chat, Global Chat"
+    />
+    <link rel="icon" href="/png/animenepal.png" />
+    <meta
+      property="og:image"
+      content="https://i.ibb.co/XbwMVch/animenepal.png"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="400" />
+    <meta property="og:image:height" content="400" />
+    <meta property="og:image:alt" content="AnimeNepal-Logo" />
+    <title>CampusFlow-Login</title>
+    <style>
+    </style>
+    <link rel="stylesheet" href="/css/form/main.css" />
+    <link rel="stylesheet" href="/css/form/login.css" />
+    <link rel="stylesheet" href="/css/form/mobile.css" />
+    <script src="/js/anime.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <!-- <script type="text/javascript" src="./node_modules/dat.gui/build/dat.gui.min.js"></script> -->
+    <style>
+      :root {
+        --green: #00d9ff;
+        --darkgreen: #064f79;
+        --dark: #101c26;
+        --dark2: #426a8c;
+      }
+      body {
+        margin: 0px;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        background-size: cover;
+        font-family: sans-serif;
+        background-image: url("https://i.imgur.com/Ec9vhLT.jpg");
+      }
+
+      .alert {
+        position: absolute;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: var(--dark2);
+        height: 40px;
+        min-width: 150px;
+        max-width: 300px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .alertIcon {
+        color: yellow;
+      }
+
+      .alertText {
+        margin-left: 5px;
+        margin-right: 5px;
+        color: white;
+      }
+
+      #wave {
+        position: absolute;
+        z-index: -1;
+      }
+      .formButtons {
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        align-items: center;
+      }
+      .showForm {
+        position: absolute;
+        height: 30px;
+        font-weight: 500;
+        font-size: 15px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      .showFormIcon {
+        height: 30px;
+        margin-left: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: 0.2s;
+      }
+      .showFormIcon:hover path {
+        fill: var(--green);
+        transition: 0.2s;
+      }
+      .showRegister {
+        right: 0px;
+        display: flex;
+        float: right;
+      }
+      .showLogin {
+        left: 0px;
+        display: flex;
+        opacity: 0;
+      }
+      .hidden {
+        display: none;
+      }
+      #addPhotoIcon {
+        color: gray;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      #addPhotoIcon:hover {
+        color: white;
+      }
+
+      .main {
+        z-index: 1;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .formBox {
+        position: relative;
+        width: 600px;
+        max-width: 600px;
+        background-color: #101c26;
+        border-radius: 20px;
+        box-shadow: rgb(14, 14, 14) 2px 2px 10px;
+      }
+      .logo {
+        position: absolute;
+        top: -65px;
+        height: 70px;
+        background-color: #101c26;
+        width: 180px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding-top: 10px;
+        padding-left: 10px;
+        overflow: hidden;
+        z-index: -1;
+      }
+      .logoSvg {
+        height: 50px;
+        width: auto;
+      }
+      .logoText {
+        fill: rgb(202, 202, 202);
+      }
+      .intro {
+        margin-top: 20px;
+        height: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #introTitle {
+        color: rgb(233, 233, 233);
+        font-weight: 600;
+        font-size: 18px;
+      }
+      #introDesc {
+        color: gray;
+      }
+      .formContainner {
+        max-width: 700px;
+        display: flex;
+        overflow-x: hidden;
+      }
+
+      .form {
+        min-height: 250px;
+        height: fit-content;
+        margin-top: 10px;
+        min-width: 100%;
+        display: flex;
+        overflow: hidden;
+      }
+      .left {
+        flex: 1;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .right {
+        flex: 1;
+        margin-left: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      .formInputContainner {
+        width: 200px;
+        height: 50px;
+        margin-bottom: 30px;
+      }
+
+      .formInputTitle {
+        height: 20px;
+        width: 100%;
+        color: gray;
+      }
+      .input {
+        height: 30px;
+        padding: 5px;
+        font-size: 18px;
+        color: rgb(218, 218, 218);
+        background-color: #426a8c;
+        border-style: none;
+        border-radius: 3px;
+        outline: none;
+        max-width: 200px;
+        width: 200px;
+      }
+      .button {
+        background-color: var(--green);
+        height: 40px;
+        width: 100px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-style: none;
+        box-shadow: rgba(0, 0, 0, 0.863) 1px 1px 10px;
+        transition: 0.2s;
+        border-radius: 3px;
+        cursor: pointer;
+        /* font-weight: bold; */
+        font-size: 18px;
+      }
+      .loading {
+        height: 40px;
+        width: 40px;
+        display: none;
+      }
+      .button:hover {
+        background-color: var(--darkgreen);
+        transition: 0.2s;
+      }
+      img {
+        border-radius: 20px;
+        max-width: 100px;
+        transition: 0.2s;
+      }
+      img:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      @media screen and (max-width: 650px) {
+        .formBox {
+          max-width: 90%;
+          width: 95%;
+          height: fit-content;
+          max-height: 70%;
+        }
+        .form {
+          max-width: 300px;
+          margin-top: 30px;
+        }
+        img {
+          max-width: 50px;
+          border-radius: 5px;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="alert" id="alert">
+        <i class="material-icons alertIcon">warning</i>
+        <div class="alertText" id="alertText"></div>
+      </div>
+      <div class="formBox">
+        <div class="intro">
+          <div id="introTitle">Welcome back!</div>
+          <div id="introDesc">Good to see you again.</div>
+        </div>
+        <div class="formContainner" id="formContainner">
+          <form class="form" id="loginForm" action="/login" method="POST">
+            <div class="left">
+              <div class="formInputContainner">
+                <div class="formInputTitle">Username</div>
+                <input type="text" name="id" required class="input" />
+              </div>
+              <div class="formInputContainner">
+                <div class="formInputTitle">Password</div>
+                <input type="password" required name="password" class="input" />
+              </div>
+              <button class="button">Login</button>
+              <svg
+                class="loading"
+                width="110"
+                height="110"
+                viewBox="0 0 110 110"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="Group">
+                  <circle
+                    id="loading"
+                    cx="55"
+                    cy="55"
+                    r="44"
+                    stroke="#2DDA11"
+                    stroke-width="22"
+                  />
+                  <path
+                    id="Subtract"
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M25.9418 32.0929C25.6107 32.5123 25.2885 32.9391 24.9755 33.3729C23.3905 35.1561 20.0118 37.7144 15.2912 34.6171C9.1311 30.5755 13.1926 24.1639 13.8896 23.1536C23.4022 10.8917 38.2795 3 55 3C66.8881 3 77.8444 6.98931 86.6034 13.7023L86.182 13.3865C86.182 13.3865 90.9836 16.9845 86.4862 22.9864C82.2807 28.5988 77.8092 25.817 77.2464 25.4322C71.0546 20.7662 63.3503 18 55 18C43.2489 18 32.7774 23.4781 25.9997 32.0198L25.9901 32.0125C25.9901 32.0125 25.9739 32.0409 25.9418 32.0929ZM96.9772 85.6966L96.2977 86.6034C96.5274 86.3037 96.754 86.0014 96.9772 85.6966ZM24.3037 96.9774L23.3963 96.2975C23.6962 96.5274 23.9987 96.754 24.3037 96.9774ZM13.0226 24.3037L13.7025 23.3963C13.4726 23.6962 13.246 23.9987 13.0226 24.3037Z"
+                    fill="black"
+                  />
+                </g>
+              </svg>
+            </div>
+          </form>
+        </div>
+        <div class="formButtons">
+          <div class="showForm showLogin">
+            <svg
+              onclick="showLogin()"
+              class="showFormIcon"
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 512 512"
+              style="enable-background: new 0 0 512 512"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M313.749,347.584
+			c8.341,8.341,8.341,21.824,0,30.165c-4.16,4.16-9.621,6.251-15.083,6.251c-5.461,0-10.923-2.091-15.083-6.251L176.917,271.083
+			c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0s8.341,21.824,0,30.165L222.165,256
+			L313.749,347.584z"
+                  />
+                </g>
+              </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+            </svg>
+
+            Login here
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+      const formContainner = document.getElementById("formContainner");
+      const showLoginButton = document.getElementsByClassName("showLogin")[0];
+      const showRegisterButton =
+        document.getElementsByClassName("showRegister")[0];
+      const introTitle = document.getElementById("introTitle");
+      const introDesc = document.getElementById("introDesc");
+
+      //////////////////////////check route and redirect///////////////
+      function checkRoute() {
+        if (window.location.pathname === "/login") {
+          showLogin();
+        } else if (window.location.pathname === "/register") {
+          showRegister();
+        } else {
+          console.log(window.location.pathname);
+        }
+      }
+      checkRoute();
+
+      ///////////////create alert///////////////////
+      const alert = document.getElementById("alert");
+      const alertText = document.getElementsByClassName("alertText")[0];
+      function makeAlert(text) {
+        anime({
+          targets: ".alert",
+          top: 0,
+        });
+        alertText.innerHTML = text;
+      }
+
+      ///////////////////remove space from username//////////////////////
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        loginForm.getElementsByClassName("button")[0].style.display = "none";
+        loginForm.getElementsByClassName("loading")[0].style.display = "block";
+        loginForm.submit();
+      });
+
+      /////////////loading animation////////////
+      anime({
+        targets: ".loading",
+        rotate: 360,
+        loop: true,
+        easing: "easeInOutSine",
+      });
+    </script>
+
+  </body>
+</html>

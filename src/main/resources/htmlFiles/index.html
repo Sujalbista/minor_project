@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusFlow-Student</title>
+    <style>
+      @media screen and (max-width: 650px) {
+        .features-containner{
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      *{
+        -webkit-user-drag: none;
+      }
+      .main {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      body {
+        height: 100vh;
+        width: 100vw;
+        padding: 0px;
+        margin: 0px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        background-color: #101c26;
+      }
+      .logoContainner {
+        height: 100px;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
+      .logoSvg {
+        height: 100px;
+        width: auto;
+      }
+      .features-containner {
+        margin-top: 30px;
+        width: auto;
+        margin: 15px;
+        background-color: #0c1720;
+        max-width: 1000px;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+
+      }
+      .features {
+        /* height: 100px; */
+        width: fit-content;
+        min-width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #000000;
+        color: rgb(200, 200, 200);
+        border-radius: 20px;
+        padding: 10px;
+        transition: 0.2s;
+      }
+      .icon {
+        color: white;
+        height: 50px;
+        width: 50px;
+        margin: 5px 5px 5px 5px;
+        transition: 0.2s;
+      }
+      .features-header {
+        font-size: 13px;
+      }
+      .features:hover {
+        box-shadow: 1px 10px 10px rgba(21, 46, 75, 0.374);
+        cursor: pointer;
+        scale: 1.1;
+        transition: 0.2s;
+      }
+      .features:hover .icon {
+        scale: 1.2;
+        transition: 0.2s;
+      }
+      h2{
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        margin: 5px;
+      }
+      h4{
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(156, 156, 156);
+        font-weight: normal;
+        margin: 0px;
+      }
+      a{
+        text-decoration: none;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <div class="main">
+
+      <h2>Welcome to Student Dashboard</h2>
+      <h4>Here are few things you can do</h4>
+      <div class="features-containner">
+        <a class="features" href="/qrcode">
+          <i class="fa fa-qrcode icon" style="font-size: 70px"></i>
+          <p class="features-header">Request QR</p>
+        </a>
+        <div class="features">
+          <img src="https://cdn-icons-png.flaticon.com/512/6612/6612036.png" class="icon" style="font-size: 70px"></img>
+          <p class="features-header">Attendence</p>
+        </div>
+        <div class="features">
+          <img src="https://cdn-icons-png.flaticon.com/512/334/334345.png" class="icon" style="font-size: 70px"></img>
+          <p class="features-header">Marks</p>
+        </div>
+        <div class="features">
+          <img src="https://cdn-icons-png.flaticon.com/512/535/535521.png" class="icon" style="font-size: 70px"></img>
+          <p class="features-header">Your Profile</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

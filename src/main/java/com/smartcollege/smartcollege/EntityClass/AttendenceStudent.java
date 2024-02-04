@@ -83,7 +83,7 @@ public class AttendenceStudent {
         this.stdFaculty.set(stdFaculty);
     }
 
-    public AttendenceStudent(Integer id, String name, String semester, String date, String faculty, String time){
+    public AttendenceStudent(Integer id, String name,String semester,String date,String faculty,String time){
         this.date = new SimpleStringProperty(date);
         this.stdID = new SimpleIntegerProperty(id);
         this.stdSemester = new SimpleStringProperty(semester);

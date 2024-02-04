@@ -11,6 +11,7 @@ module com.smartcollege.smartcollege {
     requires com.google.zxing.javase;
     requires java.mail;
     requires activation;
+    requires jdk.httpserver;
     opens com.smartcollege.smartcollege to javafx.fxml;
     opens com.smartcollege.smartcollege.EntityClass to javafx.base;
     exports com.smartcollege.smartcollege;

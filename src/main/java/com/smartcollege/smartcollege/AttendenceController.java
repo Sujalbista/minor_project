@@ -18,6 +18,7 @@ import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
@@ -39,7 +40,9 @@ public class AttendenceController {
 
     @FXML
     void startAttendence(ActionEvent event) {
-        webcam = Webcam.getWebcams().get(0);
+        Button button = (Button) event.getSource();
+        button.setVisible(false);
+        webcam = Webcam.getWebcams().get(1);
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam.setViewSize(size);
         SwingUtilities.invokeLater(() -> {
@@ -81,15 +84,18 @@ public class AttendenceController {
                         Thread.currentThread().interrupt();
                     }
 
+                    if(!button.getScene().getWindow().isShowing()){
+                        stopThread = true;
+                        webcam.close();
+                        break;
+                    }
                 } while (!stopThread);
                 return null;
             }
         };
-
         text.textProperty().bind(checkQR.valueProperty().asString("%s"));
         Thread QRThread = new Thread(checkQR);
         QRThread.setDaemon(true);
         QRThread.start();
-
     }
 }

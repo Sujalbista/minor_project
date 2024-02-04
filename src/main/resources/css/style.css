@@ -44,3 +44,17 @@ TextField {
 .tab-header-background {
   -fx-background-color: rgb(41, 41, 41);
 }
+
+#userBox {
+  -fx-background-color: rgba(0, 0, 0, 0.284);
+}
+#userImage {
+  -fx-background-radius: 50%;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.773), 50, 0, 0, 0);
+}
+#userEmailBox {
+  -fx-background-color: rgba(0, 0, 0, 0.284);
+}
+#userEmailBox1 {
+  -fx-background-color: rgba(0, 0, 0, 0.284);
+}

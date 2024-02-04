@@ -2,9 +2,6 @@ package com.smartcollege.smartcollege.database;
 
 import Encryption.Encryption;
 import com.smartcollege.smartcollege.EmailSender;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -17,10 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.smartcollege.smartcollege.qrGenerator.generator.generateQRCode;
+import java.util.ArrayList;
 
 public class Database{
     public static Connection con=null;
@@ -34,27 +28,29 @@ public class Database{
             JSONObject json = (JSONObject) rawJson;
             String sid = json.get("sid").toString();
             String bid = json.get("bid").toString();
+            String token = json.get("token").toString();
             String date = LocalDate.now().toString();
             String semester = json.get("semester").toString();
+            if(Tokens.list.contains(token)){
+                String checkAttendence = "SELECT * FROM `"+bid+"attendence` WHERE sid="+sid+" AND date = '"+date+"';";
+                PreparedStatement checkStatement = con.prepareStatement(checkAttendence);
+                ResultSet result = checkStatement.executeQuery();
+                result.next();
 
-            String checkAttendence = "SELECT * FROM `"+bid+"attendence` WHERE sid="+sid+" AND date = '"+date+"';";
-            PreparedStatement checkStatement = con.prepareStatement(checkAttendence);
-            ResultSet result = checkStatement.executeQuery();
-            result.next();
+                System.out.println(result.getFetchSize());
+                if(result.next()){
+                    return "Your attendence has already been done; ID:" +sid;
 
-            System.out.println(result.getFetchSize());
-            if(result.next()){
-                return "Your attendence has already been done; ID:" +sid;
+                }else{
+                    String sql = "Insert into "+bid+"attendence(sid,date,remarks,ofSemester)"+" values("+sid+",'"+date+"',1, '"+semester+"');";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.executeUpdate();
+                    return "Added attendence for student ID:" +sid;
 
+                }
             }else{
-                String sql = "Insert into "+bid+"attendence(sid,date,remarks,ofSemester)"+" values("+sid+",'"+date+"',1, '"+semester+"');";
-                PreparedStatement statement = con.prepareStatement(sql);
-                statement.executeUpdate();
-                return "Added attendence for student ID:" +sid;
-
+                return "QR Code has Expired!";
             }
-
-
         }catch (SQLException e){
             e.printStackTrace();
             return "Failed to add attendence";
@@ -125,14 +121,14 @@ public class Database{
     }
 
     //////====================home===================//////////
-    public static String addDepartment(String id, String name, String hod){
+    public static String addDepartment(String name, String hod){
         String feedback = "";
         //first check if the table exists or not
         if(connected){
             if(checkTable("department")){
                 //table found, lets insert data
                 try{
-                    String sql = "INSERT INTO department VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(hod)+")";
+                    String sql = "INSERT INTO department(name,hod) VALUES('"+name+"',"+Integer.parseInt(hod)+")";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     feedback= "Success";
@@ -144,12 +140,12 @@ public class Database{
                 //create table
                 System.out.println("Creating Table!");
                 try{
-                    String sql = "CREATE TABLE department(did int, name varchar(20), hod int, CONSTRAINT pk_did PRIMARY KEY (did))";
+                    String sql = "CREATE TABLE department(did int AUTO_INCREMENT PRIMARY KEY, name varchar(20), hod int)";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     System.out.println("table created!");
                     //now insert data!
-                    String sql2 = "INSERT INTO department VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(hod)+")";
+                    String sql2 = "INSERT INTO department(name,hod) VALUES('"+name+"',"+Integer.parseInt(hod)+")";
                     PreparedStatement statement2 = con.prepareStatement(sql2);
                     statement2.executeUpdate();
                     System.out.println("Data Inserted!");
@@ -164,14 +160,14 @@ public class Database{
         }
         return feedback;
     }
-    public static String addFaculty(String id, String name, String did){
+    public static String addFaculty(String name, String did){
         String feedback = "";
         //first check if the table exists or not
         if(connected){
             if(checkTable("faculty")){
                 //table found, lets insert data
                 try{
-                    String sql = "INSERT INTO faculty VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(did)+")";
+                    String sql = "INSERT INTO faculty(faculty_name,did) VALUES('"+name+"',"+Integer.parseInt(did)+")";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     feedback= "Success";
@@ -183,12 +179,12 @@ public class Database{
                 //create table
                 System.out.println("Creating Table!");
                 try{
-                    String sql = "CREATE TABLE faculty(fid int, faculty_name varchar(20), did int, CONSTRAINT pk_fid PRIMARY KEY (fid))";
+                    String sql = "CREATE TABLE faculty(fid int AUTO_INCREMENT PRIMARY KEY, faculty_name varchar(20), did int)";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     System.out.println("table created!");
                     //now insert data!
-                    String sql2 = "INSERT INTO faculty VALUES("+Integer.parseInt(id)+",'"+name+"',"+Integer.parseInt(did)+")";
+                    String sql2 = "INSERT INTO faculty(faculty_name,did) VALUES('"+name+"',"+Integer.parseInt(did)+")";
                     PreparedStatement statement2 = con.prepareStatement(sql2);
                     statement2.executeUpdate();
                     System.out.println("Data Inserted!");
@@ -273,74 +269,51 @@ public class Database{
     }
     public static String addStudent(String firstname,String middlename, String lastname, String adderss,
                                     String contact, String email, String entrance,
-                                    String fid,String bid, String pid, String sid) throws IOException, WriterException, AddressException {
+                                    String fid,String bid, String pid) throws AddressException {
         String feedback = "";
         //first check if the table exists or not
         if(connected){
             if(checkTable("students")){
                 //table found, lets insert data
                 try{
-                    String sql = "INSERT INTO students VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+adderss+"',"+contact+",'"+email+"',"+entrance+","+fid+","+bid+","+pid+","+sid+")";
-                    PreparedStatement statement = con.prepareStatement(sql);
+                    String sql = "INSERT INTO students(first_name,middle_name,last_name,address,contact,email,entrance_score,fid,bid,pid) VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+adderss+"',"+contact+",'"+email+"',"+entrance+","+fid+","+bid+","+pid+")";
+                    PreparedStatement statement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
                     statement.executeUpdate();
+
+                    ResultSet keys = statement.getGeneratedKeys();
+                    keys.next();
+                    String studentId = String.valueOf(keys.getInt(1));
+                    //generate login
+                    addLogin(studentId,bid,firstname,email);
                     feedback= "Success";
-                }catch (SQLException e){
+
+                }catch (Exception e){
                     feedback = e.toString();
                 }
-                ////////////////////QR//////////////////////////
-
-                // The data that the QR code will contain
-                String sem = "";
-                try{
-                    String sql = "SELECT semester from batch where bid ="+bid;
-                    PreparedStatement statement = con.prepareStatement(sql);
-                    ResultSet result = statement.executeQuery();
-                    result.next();
-                    sem = result.getString("semester");
-                }catch (SQLException e){
-                    e.printStackTrace();
-                }
-                String data = "{\"sid\":"+sid+"\"bid\":"+bid+",\"semester\":\""+sem+"\"}";
-
-                // The path where the image will get saved
-                String path = "./src/main/resources/images/QR.png";
-
-                // Encoding charset
-                String charset = "UTF-8";
-
-                Map<EncodeHintType, ErrorCorrectionLevel> hashMap
-                        = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
-
-                hashMap.put(EncodeHintType.ERROR_CORRECTION,ErrorCorrectionLevel.L);
-
-                generateQRCode(data, path, charset, hashMap, 200, 200);
-                System.out.println("QR Code Generated!!! ");
-
-                //////////////Email Qr code/////////////////////
-                EmailSender sendmail  = new EmailSender();
-                String to= email;
-                String subject= String.valueOf(new String[]{"welcome " + firstname +" "+ middlename+" "+lastname});
-                String text="This is your QR code for Attendance";
-                Address[] toAddresses = new Address[] { new InternetAddress(to) };
-
-                // Use the sendEmails method from the EmailSender class
-                EmailSender.sendEmail(toAddresses, subject, text, path);
 
             }else{
                 //create table
                 System.out.println("Creating Table!");
                 try{
-                    String sql = "CREATE TABLE students (first_name varchar(20),middle_name varchar(20),last_name varchar(20),address varchar(50),contact long, email varchar(50),entrance_score float, fid int, bid int, pid int, sid int, CONSTRAINT pk_sid PRIMARY KEY (sid))";
+                    String sql = "CREATE TABLE students (first_name varchar(20),middle_name varchar(20),last_name varchar(20),address varchar(50),contact long, email varchar(50),entrance_score float, fid int, bid int, pid int, sid int AUTO_INCREMENT PRIMARY KEY)";
                     PreparedStatement statement = con.prepareStatement(sql);
                     statement.executeUpdate();
                     System.out.println("table created!");
                     //now insert data!
-                    String sql2 = "INSERT INTO students VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+adderss+"',"+contact+",'"+email+"',"+entrance+","+fid+","+bid+","+pid+","+sid+")";
-                    PreparedStatement statement2 = con.prepareStatement(sql2);
+                    String sql2 = "INSERT INTO students(first_name,middle_name,last_name,address,contact,email,entrance_score,fid,bid,pid) VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+adderss+"',"+contact+",'"+email+"',"+entrance+","+fid+","+bid+","+pid+")";
+                    PreparedStatement statement2 = con.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
                     statement2.executeUpdate();
                     System.out.println("Data Inserted!");
+
+                    ResultSet keys = statement2.getGeneratedKeys();
+                    keys.next();
+                    String studentId = String.valueOf(keys.getInt(1));
+
+                    //generate login
+                    addLogin(studentId,bid,firstname,email);
                     feedback = "Success";
-                }catch (SQLException e){
+
+                }catch (Exception e){
                     feedback = e.toString();
                 }
             };
@@ -348,6 +321,56 @@ public class Database{
             feedback = "Database Not Connected!";
         }
         return feedback;
+    }
+    private static void addLogin(String sid, String batch, String name,String email) throws Exception {
+
+        if (connected) {
+            if (checkTable("login")) {
+                //table exists, insert date
+                insertLogin(sid,batch,name,email);
+
+            } else {
+                //create logins table
+                String sql = "CREATE TABLE login(lid int AUTO_INCREMENT PRIMARY KEY, sid int,username varchar(50), password varchar(50));";
+                PreparedStatement statement = con.prepareStatement(sql);
+                statement.executeUpdate();
+                //insert new logins
+                insertLogin(sid,batch,name,email);
+            }
+        }
+
+    }
+    private static void insertLogin (String sid, String batch, String name,String email) throws Exception {
+        String username;
+        String password;
+        String year;
+        String faculty;
+
+        //gather require batch year and faculty name for the student input
+        String getInfoSql = "Select batch.year, faculty.faculty_name from batch inner join faculty on faculty.fid = batch.fid where batch.bid =" + batch + ";";
+        PreparedStatement statement = con.prepareStatement(getInfoSql);
+        ResultSet info = statement.executeQuery();
+        info.next();
+        year = info.getString("year");
+        faculty = info.getString("faculty_name");
+
+        //generate username and password for new student
+        username = name+sid+faculty+year;
+        password = Encryption.generateRandomPassword(8);
+        String Epassword = Encryption.encrypt(password);
+
+        // lets insert new login
+        String sql = "INSERT INTO login(sid, username, password) VALUES(" + sid + ", '" + username + "','" + Epassword + "')";
+        PreparedStatement insertStatement = con.prepareStatement(sql);
+        insertStatement.executeUpdate();
+
+        //send Email to student
+        String subject= "Welcome to Our University, "+name;
+        String url= "localhost:5000";
+        String text="Your addmission has been done and we would like to welcome you to our wonderful Campus.\n\nHope you will have a great time with new friends and teachers. \n\n Your Student account logins for CampusFlow is listed below: \n Username:"+username+"\n Password: "+password+"\n URL: "+url+" \n\n Thank you!";
+        Address[] toAddresses = new Address[] { new InternetAddress(email) };
+        EmailSender.sendEmail(toAddresses, subject, text);
+
     }
 
     public static String addTeacher(String firstname,String middlename, String lastname, String adderss,
@@ -441,7 +464,7 @@ public class Database{
                     Integer bid = result.getInt("bid");
 
                     //add marks to batch marksheet
-                    String checkMarks = "SELECT * FROM `"+bid+"marksheet` WHERE sid="+sid+" AND semester = '"+semester+"';";
+                    String checkMarks = "SELECT * FROM `"+bid+"marksheet` WHERE sid="+sid+" AND semester = '"+semester+"' AND term ='"+terminal+"' AND subId='"+subID+"';";
                     PreparedStatement checkStatement = con.prepareStatement(checkMarks);
                     ResultSet result2 = checkStatement.executeQuery();
                     result2.next();
@@ -465,6 +488,163 @@ public class Database{
         return feedback;
     }
 
+
+
+    public static String addParent(String firstname,String middlename, String lastname, String address,
+                                   String contact, String email) throws AddressException {
+        String feedback = "";
+        //first check if the table exists or not
+        if(connected){
+            if(checkTable("parents")){
+                //table found, lets insert data
+                try{
+                    String sql = "INSERT INTO parents(first_name,middle_name,last_name,address,contact,email) VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+address+"',"+contact+",'"+email+"')";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.executeUpdate();
+
+                    feedback= "Success";
+
+                }catch (Exception e){
+                    feedback = e.toString();
+                }
+
+            }else{
+                //create table
+                System.out.println("Creating Table!");
+                try{
+                    String sql = "CREATE TABLE parents (first_name varchar(20),middle_name varchar(20),last_name varchar(20),address varchar(50),contact long, email varchar(50), pid int AUTO_INCREMENT PRIMARY KEY)";
+                    PreparedStatement statement = con.prepareStatement(sql);
+                    statement.executeUpdate();
+                    System.out.println("table created!");
+                    //now insert data!
+                    String sql2 = "INSERT INTO parents(first_name,middle_name,last_name,address,contact,email) VALUES('"+firstname+"','"+middlename+"','"+lastname+"','"+address+"',"+contact+",'"+email+"')";
+                    PreparedStatement statement2 = con.prepareStatement(sql2);
+                    statement2.executeUpdate();
+                    System.out.println("Data Inserted!");
+
+
+                    feedback = "Success";
+
+                }catch (Exception e){
+                    feedback = e.toString();
+                }
+            };
+        }else{
+            feedback = "Database Not Connected!";
+        }
+        return feedback;
+    }
+    /////////////////////search results////////////////////////////////
+    public static ArrayList<String> searchFaculty(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT faculty_name,fid from faculty WHERE faculty_name LIKE \"%"+search+"%\" OR fid LIKE \"%"+search+"%\";";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("fid")+" = "+resultSet.getString("faculty_name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+    public static ArrayList<String> searchBatch(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT year,bid,faculty_name from batch inner join faculty on batch.fid = faculty.fid WHERE year LIKE \"%"+search+"%\" OR bid LIKE \"%"+search+"%\";";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("bid")+" = "+resultSet.getString("year")+" "+resultSet.getString("faculty_name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+    public static ArrayList<String> searchParent(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT first_name,middle_name,last_name,contact,pid from parents WHERE CONCAT(first_name, ' ', middle_name, ' ',last_name,' ',pid,' ',contact) LIKE '%"+search+"%'";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("pid")+" = "+resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+    public static ArrayList<String> searchSubject(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT subId,sub_name from subjects WHERE sub_name LIKE \"%"+search+"%\" OR subId LIKE \"%"+search+"%\";";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("subId")+" = "+resultSet.getString("sub_name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+    public static ArrayList<String> searchTeacher(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT first_name,middle_name,last_name,contact,tid from teachers WHERE CONCAT(first_name, ' ', middle_name, ' ',last_name,' ',tid,' ',contact) LIKE '%"+search+"%'";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("tid")+" = "+resultSet.getString("first_name")+" "+resultSet.getString("last_name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+    public static ArrayList<String> searchDepartment(String search) {
+        ArrayList<String> result = new ArrayList<>();
+
+        try{
+            String sql = "SELECT did,name from department WHERE name LIKE \"%"+search+"%\" OR did LIKE \"%"+search+"%\";";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                result.add(resultSet.getInt("did")+" = "+resultSet.getString("name"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }
+        return result;
+    }
+
+    //////////////////Delete Student//////////////////
+
+    public static String deleteStudent(String text) throws SQLException {
+        String feedback = null;
+        if (connected) {
+            String sql = "Delete FROM students WHERE sid = '" + text + "' OR first_name = '" + text + "'";
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.executeUpdate();
+            feedback = "Success";
+        }
+        return feedback;
+
+    }
 
 }
 

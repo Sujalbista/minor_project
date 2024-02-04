@@ -60,7 +60,7 @@ public class AttendenceView {
         return FXCollections.observableArrayList(studentVector);
     }
 
-    public AttendenceView(TableView<AttendenceStudent> table, TableColumn<AttendenceStudent, String> date, TableColumn<AttendenceStudent, String> faculty, TableColumn<AttendenceStudent, String> name, TableColumn<AttendenceStudent, String> semester, TableColumn<AttendenceStudent, Integer> id, TableColumn<AttendenceStudent, String> time){
+    public AttendenceView(TableView<AttendenceStudent> table, TableColumn<AttendenceStudent, String> date,TableColumn<AttendenceStudent, String> faculty,TableColumn<AttendenceStudent, String> name,TableColumn<AttendenceStudent, String> semester,TableColumn<AttendenceStudent, Integer> id,TableColumn<AttendenceStudent, String> time){
         this.attendenceTable =table;
         this.aSidColumn = id;
         this.aSemester = semester;

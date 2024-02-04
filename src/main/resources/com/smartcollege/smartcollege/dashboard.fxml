@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.AreaChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,13 +23,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1251.0" style="-fx-background-color: #000000;" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartcollege.smartcollege.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1251.0" style="-fx-background-color: #000000;" stylesheets="@../../../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartcollege.smartcollege.HelloController">
    <children>
-      <Pane layoutX="10.0" layoutY="24.0" prefHeight="99.0" prefWidth="1217.0" style="-fx-background-color: #051923;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-
-      </Pane>
+      <Pane layoutX="10.0" layoutY="24.0" prefHeight="99.0" prefWidth="1217.0" style="-fx-background-color: #051923;" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
       <AnchorPane layoutX="10.0" layoutY="118.0" prefHeight="612.0" prefWidth="199.0" style="-fx-background-color: #003554;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="118.0">
          <children>
             <Button fx:id="homebtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="24.0" mnemonicParsing="false" onAction="#onHome" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Home" textFill="WHITE">
@@ -47,7 +56,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="teachersbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="132.0" mnemonicParsing="false" onAction="#onTeachers" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Teachers" textFill="WHITE">
+            <Button fx:id="teachersbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="182.0" mnemonicParsing="false" onAction="#onTeachers" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Teachers" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -59,7 +68,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="attendencebtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="186.0" mnemonicParsing="false" onAction="#onAttendence" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Attendence" textFill="WHITE">
+            <Button fx:id="attendencebtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="236.0" mnemonicParsing="false" onAction="#onAttendence" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Attendence" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -71,7 +80,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="batchbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="240.0" mnemonicParsing="false" onAction="#onBatch" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Batch" textFill="WHITE">
+            <Button fx:id="batchbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="290.0" mnemonicParsing="false" onAction="#onBatch" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Batch" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -95,7 +104,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="noticebtn" alignment="TOP_LEFT" layoutX="14.0" layoutY="294.0" mnemonicParsing="false" onAction="#onNotice" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Notice" textFill="WHITE">
+            <Button fx:id="noticebtn" alignment="TOP_LEFT" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" onAction="#onNotice" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Notice" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -107,7 +116,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="subjectsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="348.0" mnemonicParsing="false" onAction="#onSubjects" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Subjects" textFill="WHITE">
+            <Button fx:id="subjectsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="398.0" mnemonicParsing="false" onAction="#onSubjects" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Subjects" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -119,7 +128,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="marksbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="402.0" mnemonicParsing="false" onAction="#onMarks" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Marks" textFill="WHITE">
+            <Button fx:id="marksbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="452.0" mnemonicParsing="false" onAction="#onMarks" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Marks" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -131,11 +140,23 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="parentsbtn" alignment="TOP_LEFT" layoutX="12.0" layoutY="130.0" mnemonicParsing="false" onAction="#onParents" prefHeight="25.0" prefWidth="176.0" style="-fx-background-color: none;" text="Parents" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/parent.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="218.0" layoutY="119.0" prefHeight="612.0" prefWidth="1021.0" style="-fx-background-color: #006494;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="118.0">
          <children>
-            <TabPane fx:id="studentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TabPane fx:id="studentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="578.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <tabs>
                   <Tab text="View Students">
                      <content>
@@ -167,8 +188,8 @@
                               <TextField fx:id="s_middlename" layoutX="262.0" layoutY="42.0" />
                               <TextField fx:id="s_lastname" layoutX="462.0" layoutY="42.0" />
                               <TextField fx:id="s_entrancescore" layoutX="62.0" layoutY="172.0" />
-                              <TextField fx:id="s_fid" layoutX="262.0" layoutY="172.0" />
-                              <Button layoutX="62.0" layoutY="341.0" mnemonicParsing="false" onAction="#onAddStudent" text="ADD NEW STUDENT" />
+                              <TextField fx:id="s_fid" layoutX="262.0" layoutY="172.0" onKeyPressed="#onStudentSearchFaculty" />
+                              <Button layoutX="64.0" layoutY="304.0" mnemonicParsing="false" onAction="#onAddStudent" prefHeight="44.0" prefWidth="137.0" styleClass="submitButton" text="ADD NEW STUDENT" />
                               <Label layoutX="62.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="First Name:" textFill="WHITE" />
                               <Label layoutX="262.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="Middle Name" textFill="WHITE" />
                               <Label layoutX="462.0" layoutY="24.0" prefHeight="17.0" prefWidth="140.0" text="Last Name:" textFill="WHITE" />
@@ -177,24 +198,69 @@
                               <Label layoutX="462.0" layoutY="82.0" prefHeight="17.0" prefWidth="140.0" text="Email:" textFill="WHITE" />
                               <Label layoutX="62.0" layoutY="155.0" prefHeight="17.0" prefWidth="140.0" text="Entrance Score:" textFill="WHITE" />
                               <Label layoutX="262.0" layoutY="155.0" prefHeight="17.0" prefWidth="140.0" text="Faculty ID:" textFill="WHITE" />
-                              <TextField fx:id="s_bid" layoutX="462.0" layoutY="168.0" />
+                              <TextField fx:id="s_bid" layoutX="462.0" layoutY="168.0" onKeyPressed="#onStudentSearchBatch" />
                               <Label layoutX="462.0" layoutY="151.0" prefHeight="17.0" prefWidth="140.0" text="Batch ID:" textFill="WHITE" />
-                              <TextField fx:id="s_pid" layoutX="62.0" layoutY="246.0" />
+                              <TextField fx:id="s_pid" layoutX="62.0" layoutY="246.0" onKeyPressed="#onStudentSearchParent" />
                               <Label layoutX="62.0" layoutY="229.0" prefHeight="17.0" prefWidth="140.0" text="Parents ID:" textFill="WHITE" />
-                              <TextField fx:id="sid" layoutX="262.0" layoutY="245.0" />
-                              <Label layoutX="262.0" layoutY="228.0" prefHeight="17.0" prefWidth="140.0" text="Student ID:" textFill="WHITE" />
                            </children>
                         </Pane>
                      </content>
                   </Tab>
                   <Tab text="Search Student ">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="searchbutton" layoutX="345.0" layoutY="72.0" mnemonicParsing="false" onAction="#onSearchStudent" prefHeight="33.0" prefWidth="84.0" text="Search" />
+                              <TextField fx:id="stdnfield" layoutX="37.0" layoutY="71.0" prefHeight="39.0" prefWidth="235.0" promptText="Student Name/ ID" />
+                              <Label layoutX="41.0" layoutY="28.0" text="Student Name / ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="studentTable2" layoutY="117.0" prefHeight="443.0" prefWidth="1022.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="stdID1" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="stdName1" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="stdAddress1" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="stdContact1" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="stdEmail1" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="stdFaculty1" minWidth="0.0" prefWidth="169.0" text="Faculty" />
+                                    <TableColumn fx:id="stdBatch1" minWidth="0.0" prefWidth="54.0" text="Batch" />
+                                    <TableColumn fx:id="stdParentId1" prefWidth="73.0" text="ParentID" />
+                                 </columns>
+                              </TableView>
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                   <Tab text="Delete Student">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="stdnSearch2" layoutX="397.0" layoutY="103.0" mnemonicParsing="false" onAction="#onSearchStudent1" prefHeight="33.0" prefWidth="84.0" text="Search" />
+                              <TextField fx:id="stdnfield1" layoutX="23.0" layoutY="103.0" prefHeight="39.0" prefWidth="235.0" promptText="Student Name/ ID" />
+                              <Label layoutX="24.0" layoutY="52.0" text="Student Name / ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="deletebtn" layoutX="369.0" layoutY="378.0" mnemonicParsing="false" onAction="#onDelete" prefHeight="83.0" prefWidth="240.0" text="Delete" textFill="WHITE">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </CheckBox>
+                              <TableView fx:id="studentTable3" layoutX="7.0" layoutY="245.0" prefHeight="74.0" prefWidth="1022.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="-6.999999999999886">
+                                 <columns>
+                                    <TableColumn fx:id="stdID11" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="stdName11" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="stdAddress11" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="stdContact11" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="stdEmail11" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="stdFaculty11" minWidth="0.0" prefWidth="169.0" text="Faculty" />
+                                    <TableColumn fx:id="stdBatch11" minWidth="0.0" prefWidth="54.0" text="Batch" />
+                                    <TableColumn fx:id="stdParentId11" prefWidth="73.0" text="ParentID" />
+                                 </columns>
+                              </TableView>
+                           </children></AnchorPane>
                      </content>
                   </Tab>
                </tabs>
@@ -218,10 +284,65 @@
                               <TextField fx:id="tFirstName" layoutX="115.0" layoutY="60.0" promptText="First Name" />
                               <TextField fx:id="tSubject" layoutX="336.0" layoutY="203.0" promptText="Subject" />
                               <TextField fx:id="tFaculty" layoutX="116.0" layoutY="201.0" promptText="Faculty" />
-                              <Button layoutX="289.0" layoutY="332.0" mnemonicParsing="false" onAction="#onAddTeacher" text="ADD NEW TEACHER" />
+                              <Button layoutX="116.0" layoutY="278.0" mnemonicParsing="false" onAction="#onAddTeacher" prefHeight="44.0" prefWidth="134.0" styleClass="submitButton" text="ADD NEW TEACHER" />
                            </children>
                         </Pane>
                      </content></Tab>
+                  <Tab text="Search ">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="345.0" layoutY="72.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="84.0" text="Search" />
+                              <TextField layoutX="37.0" layoutY="68.0" prefHeight="39.0" prefWidth="235.0" promptText="Teacher  Name/ ID" />
+                              <Label layoutX="41.0" layoutY="19.0" text="Teacher Name / ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="studentTable22" layoutY="117.0" prefHeight="443.0" prefWidth="1022.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="stdID12" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="stdName12" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="stdAddress12" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="stdContact12" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="stdEmail12" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="stdFaculty12" minWidth="0.0" prefWidth="169.0" text="Faculty" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Delete">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button layoutX="397.0" layoutY="103.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="84.0" text="Search" />
+                              <TextField layoutX="73.0" layoutY="103.0" prefHeight="39.0" prefWidth="235.0" promptText="Teacher Name/ ID" />
+                              <Label layoutX="84.0" layoutY="62.0" text="Teacher Name / ID" textFill="WHITE">
+                                 <font>
+                                    <Font size="26.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox layoutX="397.0" layoutY="454.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="240.0" text="Delete" textFill="WHITE">
+                                 <font>
+                                    <Font size="28.0" />
+                                 </font>
+                              </CheckBox>
+                              <TableView fx:id="studentTable211" layoutX="2.0" layoutY="172.0" prefHeight="259.0" prefWidth="1022.0" AnchorPane.rightAnchor="-2.800000000000068">
+                                 <columns>
+                                    <TableColumn fx:id="stdID111" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="stdName111" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="stdAddress111" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="stdContact111" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="stdEmail111" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="stdFaculty111" minWidth="0.0" prefWidth="169.0" text="Faculty" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
                </tabs>
             </TabPane>
             <TabPane fx:id="homeTab" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -230,98 +351,158 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Pane layoutX="30.0" layoutY="73.0" prefHeight="109.0" prefWidth="405.0" style="-fx-background-color: #34eb5b;" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="75.0">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="30.0" text="Students" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="33.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="studentCount" layoutX="362.0" layoutY="17.0" text="40" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="320.0" layoutY="21.0" prefHeight="17.0" prefWidth="53.0" text="Total:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="302.0" layoutY="53.0" prefHeight="17.0" prefWidth="53.0" text="Present:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="362.0" layoutY="50.0" text="30" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                              <Label layoutX="30.0" layoutY="23.0" text="Welcome to Dashboard!" textFill="WHITE">
-                                 <font>
-                                    <Font name="System Bold" size="19.0" />
-                                 </font>
-                              </Label>
-                              <Pane layoutX="585.0" layoutY="73.0" prefHeight="109.0" prefWidth="405.0" style="-fx-background-color: #a721eb;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="75.0">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="30.0" text="Teachers" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="33.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="362.0" layoutY="17.0" text="40" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="320.0" layoutY="21.0" prefHeight="17.0" prefWidth="53.0" text="Total:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="302.0" layoutY="53.0" prefHeight="17.0" prefWidth="53.0" text="Present:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="362.0" layoutY="50.0" text="30" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
-                              <Pane layoutX="30.0" layoutY="250.0" prefHeight="109.0" prefWidth="405.0" style="-fx-background-color: #eb218d;">
-                                 <children>
-                                    <Label layoutX="14.0" layoutY="30.0" text="Faculty" textFill="WHITE">
-                                       <font>
-                                          <Font name="System Bold" size="33.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="362.0" layoutY="17.0" text="40" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="320.0" layoutY="21.0" prefHeight="17.0" prefWidth="53.0" text="Total:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="302.0" layoutY="53.0" prefHeight="17.0" prefWidth="53.0" text="Present:" textFill="WHITE">
-                                       <font>
-                                          <Font size="15.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="362.0" layoutY="50.0" text="30" textFill="#f7ff16">
-                                       <font>
-                                          <Font name="System Bold" size="19.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
+                              <TabPane prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <tabs>
+                                    <Tab text="Counts">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label layoutX="20.0" layoutY="21.0" text="Campus Monitor" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="34.0" />
+                                                   </font>
+                                                </Label>
+                                                <Pane layoutX="20.0" layoutY="90.0" prefHeight="194.0" prefWidth="384.0">
+                                                   <children>
+                                                      <ImageView fitHeight="200.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../images/studentcard.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="TOP_RIGHT" layoutX="292.0" layoutY="88.0" text="Students" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="studentCount" alignment="TOP_RIGHT" layoutX="290.0" layoutY="32.0" prefHeight="38.0" prefWidth="80.0" text="40" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="39.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane layoutX="515.0" layoutY="90.0" prefHeight="194.0" prefWidth="384.0">
+                                                   <children>
+                                                      <ImageView fitHeight="200.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../images/teacherscard.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="TOP_RIGHT" layoutX="292.0" layoutY="88.0" text="Teachers" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="teacherCount" alignment="TOP_RIGHT" layoutX="290.0" layoutY="32.0" prefHeight="38.0" prefWidth="80.0" text="40" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="39.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane layoutX="20.0" layoutY="340.0" prefHeight="194.0" prefWidth="384.0" AnchorPane.leftAnchor="20.0">
+                                                   <children>
+                                                      <ImageView fitHeight="200.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../images/departmentcard.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="TOP_RIGHT" layoutX="218.0" layoutY="88.0" prefHeight="30.0" prefWidth="145.0" text="Department" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="departmentCount" alignment="TOP_RIGHT" layoutX="290.0" layoutY="32.0" prefHeight="38.0" prefWidth="80.0" text="40" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="39.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                                <Pane layoutX="515.0" layoutY="340.0" prefHeight="194.0" prefWidth="384.0">
+                                                   <children>
+                                                      <ImageView fitHeight="200.0" fitWidth="382.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../images/facultycard.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                      <Label alignment="TOP_RIGHT" layoutX="292.0" layoutY="88.0" text="Faculties" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="facultyCount" alignment="TOP_RIGHT" layoutX="290.0" layoutY="32.0" prefHeight="38.0" prefWidth="80.0" text="40" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="System Bold" size="39.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </Pane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab text="Graphs">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <ScrollPane hbarPolicy="NEVER" layoutX="84.0" layoutY="81.0" pannable="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <content>
+                                                      <VBox prefHeight="843.0" prefWidth="952.0" spacing="20.0">
+                                                         <children>
+                                                            <Pane prefHeight="123.0" prefWidth="933.0">
+                                                               <children>
+                                                                  <Label layoutY="1.0" prefHeight="27.0" prefWidth="101.0" text="Attendence">
+                                                                     <font>
+                                                                        <Font size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="aGraphBatchId" layoutY="37.0" promptText="Batch ID" />
+                                                                  <Button layoutX="821.0" layoutY="34.0" mnemonicParsing="false" onAction="#onUpdateAttendenceraph" prefHeight="37.0" prefWidth="112.0" styleClass="submitButton" text="Update" />
+                                                               </children>
+                                                            </Pane>
+                                                            <AreaChart fx:id="attendenceGraph">
+                                                               <xAxis>
+                                                                  <CategoryAxis side="BOTTOM" />
+                                                               </xAxis>
+                                                               <yAxis>
+                                                                  <NumberAxis side="LEFT" />
+                                                               </yAxis>
+                                                            </AreaChart>
+                                                            <Line endX="831.2929077148438" endY="-0.621320366859436" startX="-100.0" />
+                                                            <Pane prefHeight="109.0" prefWidth="933.0">
+                                                               <children>
+                                                                  <Label layoutY="1.0" prefHeight="27.0" prefWidth="240.0" text="Results Comparasion ">
+                                                                     <font>
+                                                                        <Font size="18.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <ChoiceBox fx:id="resultTerminals" layoutY="39.0" prefWidth="150.0" />
+                                                                  <Button layoutX="820.0" layoutY="21.0" mnemonicParsing="false" onAction="#onUpdateResultGraph" prefHeight="37.0" prefWidth="112.0" styleClass="submitButton" text="Update" />
+                                                                  <ChoiceBox fx:id="resultSemester" layoutX="159.0" layoutY="39.0" prefWidth="150.0" />
+                                                               </children>
+                                                            </Pane>
+                                                            <BarChart fx:id="testGraph" prefHeight="321.0" prefWidth="955.0" VBox.vgrow="ALWAYS">
+                                                               <xAxis>
+                                                                  <CategoryAxis side="BOTTOM" />
+                                                               </xAxis>
+                                                               <yAxis>
+                                                                  <NumberAxis side="LEFT" />
+                                                               </yAxis>
+                                                            </BarChart>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                   </content>
+                                                </ScrollPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                 </tabs>
+                              </TabPane>
                            </children></AnchorPane>
                      </content>
                   </Tab>
@@ -329,14 +510,8 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="dptId" layoutX="41.0" layoutY="67.0" />
                               <TextField fx:id="dptHOD" layoutX="41.0" layoutY="215.0" prefHeight="25.0" prefWidth="176.0" />
                               <TextField fx:id="dptName" layoutX="41.0" layoutY="140.0" prefHeight="25.0" prefWidth="223.0" />
-                              <Label layoutX="41.0" layoutY="43.0" text="Department ID:" textFill="WHITE">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
                               <Label layoutX="41.0" layoutY="113.0" text="Department Name:" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
@@ -347,7 +522,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#onAddDepartment" text="Add">
+                              <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#onAddDepartment" prefHeight="37.0" prefWidth="66.0" styleClass="submitButton" text="Add">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -361,13 +536,7 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextField fx:id="fDid" layoutX="41.0" layoutY="214.0" />
-                              <TextField fx:id="fId" layoutX="41.0" layoutY="68.0" prefHeight="25.0" prefWidth="176.0" />
                               <TextField fx:id="fName" layoutX="41.0" layoutY="138.0" prefHeight="25.0" prefWidth="223.0" />
-                              <Label layoutX="41.0" layoutY="43.0" text="Faculty ID:" textFill="WHITE">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
                               <Label layoutX="41.0" layoutY="112.0" text="Faculty Name:" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
@@ -378,7 +547,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#onAddFaculty" text="Add">
+                              <Button layoutX="41.0" layoutY="292.0" mnemonicParsing="false" onAction="#onAddFaculty" prefHeight="36.0" prefWidth="57.0" styleClass="submitButton" text="Add">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
@@ -400,14 +569,8 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="bId" layoutX="41.0" layoutY="67.0" />
                               <TextField fx:id="b_fId" layoutX="41.0" layoutY="215.0" prefHeight="25.0" prefWidth="176.0" />
                               <TextField fx:id="b_year" layoutX="41.0" layoutY="140.0" prefHeight="25.0" prefWidth="223.0" />
-                              <Label layoutX="41.0" layoutY="43.0" text="Batch ID:" textFill="WHITE">
-                                 <font>
-                                    <Font size="13.0" />
-                                 </font>
-                              </Label>
                               <Label layoutX="41.0" layoutY="113.0" text="Year:" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
@@ -418,17 +581,13 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="42.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddBatch" text="Add">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
                               <TextField fx:id="b_semester" layoutX="41.0" layoutY="293.0" prefHeight="25.0" prefWidth="176.0" />
                               <Label layoutX="41.0" layoutY="266.0" text="Semester" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </Label>
+                              <Button layoutX="41.0" layoutY="345.0" mnemonicParsing="false" onAction="#onAddBatch" prefHeight="44.0" prefWidth="137.0" styleClass="submitButton" text="Add Marks" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -489,11 +648,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="45.0" layoutY="230.0" mnemonicParsing="false" onAction="#onAddSubject" text="Add">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
+                              <Button layoutX="44.0" layoutY="227.0" mnemonicParsing="false" onAction="#onAddSubject" prefHeight="44.0" prefWidth="137.0" styleClass="submitButton" text="Add Subject" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -542,7 +697,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TextField fx:id="mSubID" layoutX="112.0" layoutY="88.0" prefHeight="25.0" prefWidth="223.0" />
+                              <TextField fx:id="mSubID" layoutX="112.0" layoutY="88.0" onKeyPressed="#onMarksSearchSubject" prefHeight="25.0" prefWidth="223.0" />
                               <Label layoutX="112.0" layoutY="61.0" text="Subject ID:" textFill="WHITE">
                                  <font>
                                     <Font size="13.0" />
@@ -553,11 +708,6 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="120.0" layoutY="475.0" mnemonicParsing="false" onAction="#onAddSubjectMarks" text="Add marks">
-                                 <font>
-                                    <Font name="System Bold" size="15.0" />
-                                 </font>
-                              </Button>
                               <ChoiceBox fx:id="mSemList" layoutX="112.0" layoutY="178.0" prefWidth="150.0" />
                               <TextField fx:id="mStdMarks" layoutX="112.0" layoutY="264.0" prefHeight="25.0" prefWidth="112.0" />
                               <Label layoutX="112.0" layoutY="239.0" text="Marks:" textFill="WHITE">
@@ -593,6 +743,7 @@
                                  </font>
                               </Label>
                               <ChoiceBox fx:id="mTermList" layoutX="112.0" layoutY="423.0" prefWidth="150.0" />
+                              <Button layoutX="108.0" layoutY="474.0" mnemonicParsing="false" onAction="#onAddSubjectMarks" prefHeight="44.0" prefWidth="137.0" styleClass="submitButton" text="Add Marks" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -642,11 +793,7 @@
                                     <Font name="Arial" size="35.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="announcementbtn" contentDisplay="CENTER" layoutX="31.0" layoutY="372.0" mnemonicParsing="false" onAction="#onAnnouncement" prefHeight="44.0" prefWidth="131.0" styleClass="submitButton" text="Announce">
-                                 <font>
-                                    <Font name="Arial" size="20.0" />
-                                 </font>
-                              </Button>
+                              <Button fx:id="announcementbtn" layoutX="31.0" layoutY="403.0" mnemonicParsing="false" onAction="#onAnnouncement" prefHeight="44.0" prefWidth="137.0" styleClass="submitButton" text="Announce" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -696,7 +843,69 @@
                         </Pane>
                      </content>
                   </Tab>
-                  <Tab text="User" />
+                  <Tab text="User">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Pane fx:id="userBox" layoutX="52.0" layoutY="113.0" prefHeight="414.0" prefWidth="331.0">
+                                 <children>
+                                    <ImageView fx:id="userImage" fitHeight="126.0" fitWidth="131.0" layoutX="100.0" layoutY="-63.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/profile.png" />
+                                       </image>
+                                    </ImageView>
+                                    <TextField fx:id="userOldPass" layoutX="40.0" layoutY="100.0" prefHeight="44.0" prefWidth="252.0" />
+                                    <TextField fx:id="userNewPass" layoutX="40.0" layoutY="196.0" prefHeight="44.0" prefWidth="252.0" />
+                                    <TextField fx:id="userNewPassConfirm" layoutX="40.0" layoutY="281.0" prefHeight="44.0" prefWidth="252.0" />
+                                    <Label layoutX="40.0" layoutY="72.0" text="Current Password:" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="40.0" layoutY="174.0" text="New Password:" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="40.0" layoutY="254.0" text="Confirm Password:" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Line endX="100.0" layoutX="163.0" layoutY="162.0" startX="-100.0" stroke="WHITE" />
+                                    <Button layoutX="105.0" layoutY="350.0" mnemonicParsing="false" onAction="#onUpdatePassword" prefHeight="44.0" prefWidth="117.0" styleClass="submitButton" text="Update" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="userEmailBox" layoutX="402.0" layoutY="113.0" prefHeight="115.0" prefWidth="443.0">
+                                 <children>
+                                    <Button layoutX="303.0" layoutY="41.0" mnemonicParsing="false" onAction="#onUpdateEmail" prefHeight="44.0" prefWidth="117.0" styleClass="submitButton" text="Change" />
+                                    <TextField fx:id="userEmail" layoutX="14.0" layoutY="41.0" prefHeight="44.0" prefWidth="252.0" />
+                                    <Label layoutX="14.0" layoutY="14.0" text="Email:" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="14.0" layoutY="93.0" text="Note: It is recommended to have email as it will help reset password if you forget" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Italic" size="12.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="userEmailBox1" layoutX="402.0" layoutY="248.0" prefHeight="115.0" prefWidth="443.0">
+                                 <children>
+                                    <Button layoutX="303.0" layoutY="41.0" mnemonicParsing="false" onAction="#onUpdateUsername" prefHeight="44.0" prefWidth="117.0" styleClass="submitButton" text="Change" />
+                                    <TextField fx:id="userUsername" layoutX="14.0" layoutY="41.0" prefHeight="44.0" prefWidth="252.0" />
+                                    <Label layoutX="14.0" layoutY="14.0" text="Username:" textFill="WHITE">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </content></Tab>
                </tabs>
             </TabPane>
             <TabPane fx:id="attendenceTab" layoutX="159.0" layoutY="112.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -733,6 +942,52 @@
                   </Tab>
                </tabs>
             </TabPane>
+            <TabPane fx:id="parentsTab" layoutX="33.0" layoutY="33.0" prefHeight="200.0" prefWidth="331.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <tabs>
+                  <Tab text="View Details">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="studentTable1" prefHeight="524.0" prefWidth="999.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="pID" prefWidth="62.0" text="ID" />
+                                    <TableColumn fx:id="pName" prefWidth="124.0" text="Name" />
+                                    <TableColumn fx:id="pAddress" prefWidth="226.0" text="Address" />
+                                    <TableColumn fx:id="pcontact" prefWidth="82.0" text="Contact" />
+                                    <TableColumn fx:id="pEmail" minWidth="3.0" prefWidth="188.0" text="Email" />
+                                    <TableColumn fx:id="sID" prefWidth="73.0" text="Sutdent ID" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Add Parents Detail">
+                     <content>
+                        <Pane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <TextField fx:id="p_firstname" layoutX="62.0" layoutY="72.0" />
+                              <TextField fx:id="p_contact" layoutX="262.0" layoutY="149.0" />
+                              <TextField fx:id="p_email" layoutX="462.0" layoutY="149.0" />
+                              <TextField fx:id="p_address" layoutX="62.0" layoutY="152.0" />
+                              <TextField fx:id="p_middlename" layoutX="262.0" layoutY="72.0" />
+                              <TextField fx:id="p_lastname" layoutX="462.0" layoutY="72.0" />
+                              <Button fx:id="addParent" layoutX="62.0" layoutY="222.0" mnemonicParsing="false" onAction="#onAddParent" prefHeight="35.0" prefWidth="100.0" styleClass="submitButton" text="ADD  Details" />
+                              <Label layoutX="62.0" layoutY="54.0" prefHeight="17.0" prefWidth="140.0" text="First Name:" textFill="WHITE" />
+                              <Label layoutX="262.0" layoutY="54.0" prefHeight="17.0" prefWidth="140.0" text="Middle Name" textFill="WHITE" />
+                              <Label layoutX="462.0" layoutY="54.0" prefHeight="17.0" prefWidth="140.0" text="Last Name:" textFill="WHITE" />
+                              <Label layoutX="62.0" layoutY="134.0" prefHeight="17.0" prefWidth="140.0" text="Address:" textFill="WHITE" />
+                              <Label layoutX="262.0" layoutY="132.0" prefHeight="17.0" prefWidth="140.0" text="Contact No:" textFill="WHITE" />
+                              <Label layoutX="462.0" layoutY="132.0" prefHeight="17.0" prefWidth="140.0" text="Email:" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="220.0" layoutY="686.0" prefHeight="44.0" prefWidth="1021.0" style="-fx-background-color: #051923;" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="10.0">
@@ -749,5 +1004,17 @@
             </Button>
          </children>
       </AnchorPane>
+      <Pane fx:id="searchResults" layoutX="920.0" layoutY="30.0" prefHeight="612.0" prefWidth="312.0" style="-fx-background-color: #36454f;" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="118.0">
+         <children>
+            <ListView fx:id="searchResultList" layoutX="10.0" layoutY="50.0" prefHeight="549.0" prefWidth="293.0" />
+            <Label layoutX="122.0" layoutY="14.0" text="Search Results" textFill="#00ff90">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="286.0" layoutY="2.0" mnemonicParsing="false" onAction="#onCloseSearch" text="X" />
+         </children>
+      </Pane>
+      <ProgressBar fx:id="progressBar" layoutX="1038.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" visible="false" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0" />
    </children>
 </AnchorPane>
