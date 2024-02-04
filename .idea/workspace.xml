@@ -4,50 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="18fd89d1-ca66-4702-be4c-572acb05cf51" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EntityClass/Parent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/database/Tokens.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/database/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/htmlFiles/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/htmlFiles/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/departmentcard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/facultycard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/parent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/parents.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/studentcard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/images/teacherscard.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Encryption/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Encryption/Encryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/AttendenceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/AttendenceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/Dashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/Dashboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EntityClass/AttendenceStudent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EntityClass/AttendenceStudent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EntityClass/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/EntityClass/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/database/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/database/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/qrGenerator/generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/qrGenerator/generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/AttendenceView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/AttendenceView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/MarksStudentSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/MarksStudentSearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/StudentView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/smartcollege/smartcollege/tableview/StudentView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/dashboard.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/smartcollege/smartcollege/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/QR.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/images/QR.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/attendance.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/batch.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/home.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/logowithtext.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/marks.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/notice.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/setting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/students.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/subjects.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/images/teachers.png" beforeDir="false" />
-    </list>
+    <list default="true" id="18fd89d1-ca66-4702-be4c-572acb05cf51" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
