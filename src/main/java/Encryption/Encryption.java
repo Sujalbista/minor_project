@@ -4,8 +4,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
+
 public class Encryption {
-    private static final String secretKey = "deadLineSundayRe";
+    private static final String secretKey = "kandogldlrltpsog";
 
     public static String encrypt(String data) throws Exception {
         SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(StandardCharsets.UTF_8), "AES");
@@ -35,9 +36,6 @@ public class Encryption {
         }
 
         return password.toString();
-    }
-    public static void main(String[] args) throws Exception {
-        System.out.println(encrypt("@whoami@"));
     }
 
 }
