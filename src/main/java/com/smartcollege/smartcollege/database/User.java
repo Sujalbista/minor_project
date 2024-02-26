@@ -1,10 +1,14 @@
 package com.smartcollege.smartcollege.database;
 
 import Encryption.Encryption;
+import com.smartcollege.smartcollege.EmailSender;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.mail.Address;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -61,6 +65,39 @@ public class User {
         }
         return feedback;
     }
+    public static String onForgetPassword(){
+        String feedback = "";
+        if(checkUserExistance()){
+            JSONParser parser = new JSONParser();
+            try(FileReader reader = new FileReader("./src/main/resources/config/user.json")){
+                Object obj = parser.parse(reader);
+                JSONObject json = (JSONObject) obj;
+                String email = json.get("email").toString();
+                if(email.isEmpty()){
+                    feedback= "Sorry but no recovery email found!";
+                }else{
+                    String password = Encryption.generateRandomPassword(8);
+                    String subject = "Password reset | smartcollege";
+                    String text = "We have reset your password for admin dashboard. Make sure not to share this password. It is better if you change this generated password to your own from settings. \n\nNew Password: "+password;
+
+                    Address[] toAddresses = new Address[] { new InternetAddress(email) };
+                    EmailSender.sendEmail(toAddresses,subject,text);
+
+                    feedback = "Please check your Email";
+
+
+                }
+            }catch (IOException | ParseException e){
+                feedback = e.toString();
+            } catch (AddressException e) {
+                feedback = e.toString();
+            }
+        }else{
+            feedback="No user found!";
+        }
+
+        return feedback;
+    }
     public static String updatePassword(String oldPassword,String password){
         String feedback = "";
         if(checkUserExistance()){
@@ -101,8 +138,6 @@ public class User {
                 }else{
                     feedback = "Password is incorrect!";
                 }
-            }catch (IOException e){
-                feedback = e.toString();
             } catch (Exception e) {
                 feedback = e.toString();
             }

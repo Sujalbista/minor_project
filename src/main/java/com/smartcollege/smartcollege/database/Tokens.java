@@ -1,13 +1,14 @@
 package com.smartcollege.smartcollege.database;
 
+import Encryption.Encryption;
+
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class Tokens {
     static ArrayList<String> list = new ArrayList<String>();
 
     public static String generateNewToken(){
-        String token = UUID.randomUUID().toString();
+        String token = Encryption.generateRandomPassword(10);
         list.add(token);
 
         //clear token thread
@@ -35,10 +36,6 @@ public class Tokens {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
     }
-
-
 }

@@ -10,14 +10,17 @@
 <StackPane prefHeight="358.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.smartcollege.smartcollege.AttendenceController">
    <children>
       <SwingNode fx:id="swingNode" />
-      <Button mnemonicParsing="false" onAction="#startAttendence" prefHeight="25.0" prefWidth="109.0" text="Start Attendence" StackPane.alignment="TOP_LEFT">
-         <StackPane.margin>
-            <Insets left="10.0" top="10.0" />
-         </StackPane.margin></Button>
-      <Label fx:id="text" alignment="TOP_LEFT" prefHeight="77.0" prefWidth="667.0" style="-fx-background-color: #c1c1c1;" text="Label" StackPane.alignment="BOTTOM_LEFT">
+      <Label fx:id="text" alignment="TOP_LEFT" prefHeight="77.0" prefWidth="667.0" style="-fx-background-color: #ffffff;" wrapText="true" StackPane.alignment="BOTTOM_LEFT">
          <font>
             <Font size="17.0" />
          </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </Label>
+      <Button mnemonicParsing="false" onAction="#startAttendence" prefHeight="42.0" prefWidth="145.0" styleClass="submitButton" stylesheets="@../../../css/style.css" text="Start Attendence" StackPane.alignment="CENTER">
+         <StackPane.margin>
+            <Insets left="10.0" top="10.0" />
+         </StackPane.margin></Button>
    </children>
 </StackPane>

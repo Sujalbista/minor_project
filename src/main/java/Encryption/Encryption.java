@@ -4,7 +4,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
-
 public class Encryption {
     private static final String secretKey = "kandogldlrltpsog";
 

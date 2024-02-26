@@ -3,28 +3,20 @@ package com.smartcollege.smartcollege;
 import com.smartcollege.smartcollege.database.Database;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
-
 import com.github.sarxos.webcam.WebcamResolution;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.MultiFormatReader;
-import com.google.zxing.NotFoundException;
+import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
-import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
-
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javax.swing.SwingUtilities;
+
+import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-
-import java.time.LocalDate;
 
 public class AttendenceController {
     private volatile boolean stopThread = false;
@@ -42,7 +34,7 @@ public class AttendenceController {
     void startAttendence(ActionEvent event) {
         Button button = (Button) event.getSource();
         button.setVisible(false);
-        webcam = Webcam.getWebcams().get(0);
+        webcam = Webcam.getWebcams().get(1);
         Dimension size = WebcamResolution.QVGA.getSize();
         webcam.setViewSize(size);
         SwingUtilities.invokeLater(() -> {

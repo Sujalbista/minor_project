@@ -1,7 +1,7 @@
 package com.smartcollege.smartcollege.tableview;
 
-import com.campusflow.campusflow.EntityClass.Marks;
-import com.campusflow.campusflow.database.Database;
+import com.smartcollege.smartcollege.EntityClass.Marks;
+import com.smartcollege.smartcollege.database.Database;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;

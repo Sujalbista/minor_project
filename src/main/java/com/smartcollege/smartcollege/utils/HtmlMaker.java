@@ -68,12 +68,6 @@ public class HtmlMaker {
                 "            justify-content: center;\n" +
                 "            align-items: center;\n" +
                 "          \"\n" +
-                "        >\n" +
-                "          <img\n" +
-                "            class=\"logo\"\n" +
-                "            src=\"https://raw.githubusercontent.com/Subu19/Campusflow/master/src/main/resources/images/logowithtext.png\"\n" +
-                "            style=\"width: 80%; height: auto\"\n" +
-                "          />\n" +
                 "        </div>\n" +
                 "        <h1 class=\"heading\">"+term+" marksheet</h1>\n" +
                 "        <div class=\"text\">\n" +
@@ -128,7 +122,7 @@ public class HtmlMaker {
                 "          "+student+"'s education.\n" +
                 "          <br /><br />\n" +
                 "          Sincerely,\n" +
-                "          <br />Campusflow BOT\n" +
+                "          <br />smartcollege BOT\n" +
                 "        </div>\n" +
                 "      </div>\n" +
                 "    </div>\n" +

@@ -3,92 +3,96 @@ package com.smartcollege.smartcollege.EntityClass;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 public class Parent {
-    private SimpleIntegerProperty stdID;
+
     private SimpleStringProperty pName;
     private SimpleStringProperty pAddress;
     private SimpleIntegerProperty pContact;
     private SimpleStringProperty pEmail;
     private SimpleIntegerProperty pId;
+    private  SimpleStringProperty pfirst_name;
+    private  SimpleStringProperty plast_name;
+    private SimpleStringProperty pmiddle_name;
 
-
-    public int getStdID() {
-        return stdID.get();
+    public String getPfirst_name() {
+        return pfirst_name.get();
     }
 
-    public SimpleIntegerProperty stdIDProperty() {
-        return stdID;
+    public SimpleStringProperty pfirst_nameProperty() {
+        return pfirst_name;
     }
 
-    public String getStdName() {
-        return pName.get();
+    public void setPfirst_name(String pfirst_name) {
+        this.pfirst_name.set(pfirst_name);
     }
 
-    public SimpleStringProperty stdNameProperty() {
-        return pName;
+    public String getPlast_name() {
+        return plast_name.get();
     }
 
-    public String getStdAddress() {
-        return pAddress.get();
+    public SimpleStringProperty plast_nameProperty() {
+        return plast_name;
     }
 
-    public SimpleStringProperty stdAddressProperty() {
-        return pAddress;
+    public void setPlast_name(String plast_name) {
+        this.plast_name.set(plast_name);
     }
 
-    public int getStdContact() {
-        return pContact.get();
+    public String getPmiddle_name() {
+        return pmiddle_name.get();
     }
 
-    public SimpleIntegerProperty stdContactProperty() {
-        return pContact;
+    public SimpleStringProperty pmiddle_nameProperty() {
+        return pmiddle_name;
     }
 
-    public String getStdEmail() {
-        return pEmail.get();
+    public void setPmiddle_name(String pmiddle_name) {
+        this.pmiddle_name.set(pmiddle_name);
     }
 
-    public SimpleStringProperty stdEmailProperty() {
-        return pEmail;
-    }
+    public String getpName() {return pName.get();}
 
-    public int getStdParentId() {
-        return pId.get();
-    }
+    public SimpleStringProperty pNameProperty() {return pName;}
 
-    public SimpleIntegerProperty stdParentIdProperty() {
-        return pId;
-    }
+    public String getpAddress() {return pAddress.get();}
 
-    public void setStdID(int stdID) {
-        this.stdID.set(stdID);
-    }
+    public SimpleStringProperty pAddressProperty() {return pAddress;}
 
-    public void setStdName(String stdName) {
-        this.pName.set(stdName);
-    }
+    public int getpContact() {return pContact.get();}
 
-    public void setStdAddress(String stdAddress) {
-        this.pAddress.set(stdAddress);
-    }
+    public SimpleIntegerProperty pContactProperty() {return pContact;}
 
-    public void setStdContact(int stdContact) {
-        this.pContact.set(stdContact);
-    }
+    public String getpEmail() {return pEmail.get();}
 
-    public void setStdEmail(String stdEmail) {
-        this.pEmail.set(stdEmail);
-    }
+    public SimpleStringProperty pEmailProperty() {return pEmail;}
 
-    public void setStdParentId(int stdParentId) {
-        this.pId.set(stdParentId);
-    }
+    public int getpId() {return pId.get();}
 
-    public Parent(Integer id, String name, String address, Integer contact, String email, Integer parnetID){
+    public SimpleIntegerProperty pIdProperty() {return pId;}
+
+    public void setpName(String pName) {this.pName.set(pName);}
+
+    public void setpAddress(String pAddress) {this.pAddress.set(pAddress);}
+
+    public void setpContact(int pContact) {this.pContact.set(pContact);}
+
+    public void setpEmail(String pEmail) {this.pEmail.set(pEmail);}
+
+    public void setpId(int pId) {this.pId.set(pId);}
+
+    public Parent(Integer id, String name, String address, Integer contact, String email){
         this.pAddress =new SimpleStringProperty(address);
         this.pName = new SimpleStringProperty(name);
-        this.stdID =new SimpleIntegerProperty(id);
         this.pContact = new SimpleIntegerProperty(contact);
-        this.pId = new SimpleIntegerProperty(parnetID);
+        this.pId = new SimpleIntegerProperty(id);
+        this.pEmail = new SimpleStringProperty(email);
+    }
+    public Parent(int id, String firstName, String middleName, String lastName, String address, Integer contact, String email) {
+        this.pfirst_name = new SimpleStringProperty(firstName);
+        this.pmiddle_name = new SimpleStringProperty(middleName);
+        this.plast_name = new SimpleStringProperty(lastName);
+        this.pAddress =new SimpleStringProperty(address);
+        this.pContact = new SimpleIntegerProperty(contact);
+        this.pId = new SimpleIntegerProperty(id);
         this.pEmail = new SimpleStringProperty(email);
     }
 }

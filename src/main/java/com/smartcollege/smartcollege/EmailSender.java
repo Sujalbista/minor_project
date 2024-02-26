@@ -1,10 +1,5 @@
 package com.smartcollege.smartcollege;
 
-import Encryption.Encryption;
-
-import java.io.File;
-import java.util.Properties;
-
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
@@ -13,11 +8,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import java.io.File;
+import java.util.Properties;
 
 public class EmailSender {
     private static final String HOST = "smtp.gmail.com";
-    private static final String USERNAME = "smartcollege004@gmail.com";
-    private static final String PASSWORD = "hwfv bhqk uife xffr"; // This is secured!
+    private static final String USERNAME = "smartcollegeminorproject@gmail.com";
+    private static final String PASSWORD = "lhjq rnpw wngw igeo"; // This is secured!
 
     private static Session session;
     // Initialize the session once
@@ -32,13 +29,9 @@ public class EmailSender {
             properties.put("mail.smtp.port", "465");
             properties.put("mail.smtp.ssl.enable", "true");
             properties.put("mail.smtp.auth", "true");
-            session = Session.getInstance(properties, new javax.mail.Authenticator() {
+            session = Session.getInstance(properties, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    try {
-                        return new PasswordAuthentication(USERNAME, PASSWORD);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    return new PasswordAuthentication(USERNAME, PASSWORD);
                 }
             });
             session.setDebug(true);

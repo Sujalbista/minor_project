@@ -3,7 +3,6 @@ package com.smartcollege.smartcollege;
 import Encryption.Encryption;
 import com.smartcollege.smartcollege.database.Database;
 import com.smartcollege.smartcollege.database.Tokens;
-import com.smartcollege.smartcollege.EmailSender;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -63,7 +62,6 @@ public class Dashboard{
         //start HTTP server
         startHttpserver();
 
-
         //start smtp server
         EmailSender.initialize();
 
@@ -71,7 +69,7 @@ public class Dashboard{
     private void startHttpserver(){
 
         try{
-            HttpServer server = HttpServer.create(new InetSocketAddress(5000),0);
+            HttpServer server = HttpServer.create(new InetSocketAddress(3000),0);
             // Create a handler that serves an HTML file
             server.createContext("/", new HttpHandler() {
                 @Override
@@ -82,7 +80,7 @@ public class Dashboard{
 
                     //get login request
                     if ("/login".equals(requestPath) && "GET".equals(requestMethod)) {
-                        File htmlFile = new File("./src/main/resources/htmlFiles/login.html");
+                        File htmlFile = new File("./src/main/resources/htmlFiles/login.html"); // Adjust the path to your HTML file
                         if (htmlFile.exists() && htmlFile.isFile()) {
                             byte[] htmlBytes = Files.readAllBytes(htmlFile.toPath());
                             exchange.sendResponseHeaders(200, htmlBytes.length);
@@ -180,7 +178,7 @@ public class Dashboard{
                     if (("/".equals(requestPath) || "/home".equals(requestPath)) && "GET".equals(requestMethod)) {
                         String sessionId = getSessionIdFromCookie(exchange);
                         if (sessionId != null && sessions.containsKey(sessionId)) {
-                            File htmlFile = new File("./src/main/resources/htmlFiles/index.html");
+                            File htmlFile = new File("./src/main/resources/htmlFiles/index.html"); // Adjust the path to your HTML file
                             if (htmlFile.exists() && htmlFile.isFile()) {
                                 byte[] htmlBytes = Files.readAllBytes(htmlFile.toPath());
                                 exchange.sendResponseHeaders(200, htmlBytes.length);
